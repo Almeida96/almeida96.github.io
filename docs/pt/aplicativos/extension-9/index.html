@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/pt/aplicativos/extension-9/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -67,25 +67,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
-      <p class="engineering-intro">Cada pendência tem um ponto de retomada em memória. Depois de uma captura, o jogador pode repetir a ligação em andamento. Ao abrir o caderno, a ameaça fica pausada durante a leitura.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>Unreal Engine e C++</dt>
-    <dd>O modo de jogo em C++ controla ligações, objetivos e desfechos. Uma classe separada desenha o caderno e as legendas a partir desse estado, mantendo o diálogo coerente com a tarefa atual.</dd>
-  </div>
-<div>
-    <dt>Visibilidade e colisão</dt>
-    <dd>Antes de a ameaça capturar o jogador, o jogo traça uma linha da câmera em primeira pessoa até ela. Uma parede que bloqueie essa linha pode interromper um encontro no corredor.</dd>
-  </div>
-<div>
-    <dt>Ferramentas de áudio</dt>
-    <dd>Um script em Python sintetiza efeitos provisórios em WAV. O telefone combina dois tons com pausas programadas. Uma semente fixa permite reproduzir os efeitos que usam ruído.</dd>
-  </div>
-<div>
-    <dt>Testes do jogo no Windows</dt>
-    <dd>Um script em PowerShell inicia a Unreal sem intervenção e verifica pontos de retomada, capturas e os dois finais. Também pode testar a versão empacotada para Windows e salvar imagens para revisão visual.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Da ligação à pista</figcaption>
+          <ol role="list"><li>
+    <strong>Atender ao telefone</strong><span>Comando do jogador</span>
+  </li>
+<li>
+    <strong>Atualizar o objetivo</strong><span>Modo de jogo em C++</span>
+  </li>
+<li>
+    <strong>Consultar a pista</strong><span>Legendas e caderno no HUD</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">Cada pendência tem um ponto de retomada em memória. Depois de uma captura, o jogador pode repetir a ligação em andamento. Ao abrir o caderno, a ameaça fica pausada durante a leitura.</p>
+          <div class="engineering-notes"><details open>
+    <summary>Unreal Engine e C++<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>O modo de jogo em C++ controla ligações, objetivos e desfechos. Uma classe separada desenha o caderno e as legendas a partir desse estado, mantendo o diálogo coerente com a tarefa atual.</p>
+  </details>
+<details>
+    <summary>Visibilidade e colisão<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Antes de a ameaça capturar o jogador, o jogo traça uma linha da câmera em primeira pessoa até ela. Uma parede que bloqueie essa linha pode interromper um encontro no corredor.</p>
+  </details>
+<details>
+    <summary>Ferramentas de áudio<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Um script em Python sintetiza efeitos provisórios em WAV. O telefone combina dois tons com pausas programadas. Uma semente fixa permite reproduzir os efeitos que usam ruído.</p>
+  </details>
+<details>
+    <summary>Testes do jogo no Windows<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Um script em PowerShell inicia a Unreal sem intervenção e verifica pontos de retomada, capturas e os dois finais. Também pode testar a versão empacotada para Windows e salvar imagens para revisão visual.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/pt/aplicativos/medapp/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -67,25 +67,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
-      <p class="engineering-intro">O servidor verifica as datas propostas contra consultas e bloqueios existentes e grava a série de uma só vez. Um conflito na última data impede que parte da série fique agendada por engano.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>Cliente e API</dt>
-    <dd>O aplicativo usa TypeScript, React Native e Expo. Uma API em JavaScript, construída com Node.js, atende às requisições da agenda. No aparelho, o Expo SecureStore guarda o token de sessão usado nas requisições autenticadas.</dd>
-  </div>
-<div>
-    <dt>Modelo de persistência</dt>
-    <dd>O protótipo usa um processo de API e um arquivo JSON. As gravações entram em uma fila, alteram uma cópia dos dados e substituem o arquivo antes que o novo estado fique visível para outras requisições.</dd>
-  </div>
-<div>
-    <dt>Repetição de agendamentos</dt>
-    <dd>Cada pedido de agendamento recorrente recebe um identificador. Repetir o mesmo pedido devolve a série já salva, inclusive após reiniciar a API. Reutilizar o identificador com datas ou regras diferentes gera um conflito HTTP 409.</dd>
-  </div>
-<div>
-    <dt>Testes da agenda</dt>
-    <dd>Os testes em Node.js disputam os mesmos horários com duas séries e introduzem um conflito em uma consulta posterior. Também verificam a mudança do horário de verão, quando uma hora local deixa de existir.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Agendamento de consultas recorrentes</figcaption>
+          <ol role="list"><li>
+    <strong>Propor as datas</strong><span>Paciente, horário e recorrência</span>
+  </li>
+<li>
+    <strong>Conferir os horários</strong><span>Consultas e períodos bloqueados</span>
+  </li>
+<li>
+    <strong>Salvar a série</strong><span>Uma gravação em fila</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">O servidor verifica as datas propostas contra consultas e bloqueios existentes e grava a série de uma só vez. Um conflito na última data impede que parte da série fique agendada por engano.</p>
+          <div class="engineering-notes"><details open>
+    <summary>Cliente e API<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>O aplicativo usa TypeScript, React Native e Expo. Uma API em JavaScript, construída com Node.js, atende às requisições da agenda. No aparelho, o Expo SecureStore guarda o token de sessão usado nas requisições autenticadas.</p>
+  </details>
+<details>
+    <summary>Modelo de persistência<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>O protótipo usa um processo de API e um arquivo JSON. As gravações entram em uma fila, alteram uma cópia dos dados e substituem o arquivo antes que o novo estado fique visível para outras requisições.</p>
+  </details>
+<details>
+    <summary>Repetição de agendamentos<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Cada pedido de agendamento recorrente recebe um identificador. Repetir o mesmo pedido devolve a série já salva, inclusive após reiniciar a API. Reutilizar o identificador com datas ou regras diferentes gera um conflito HTTP 409.</p>
+  </details>
+<details>
+    <summary>Testes da agenda<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Os testes em Node.js disputam os mesmos horários com duas séries e introduzem um conflito em uma consulta posterior. Também verificam a mudança do horário de verão, quando uma hora local deixa de existir.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/pt/aplicativos/retoma/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -67,25 +67,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
-      <p class="engineering-intro">O servidor guarda os valores em centavos inteiros e interpreta as datas no fuso de São Paulo. O total e o dia de retorno mantêm o mesmo significado quando o painel é reaberto.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>React e TypeScript</dt>
-    <dd>O painel em React e os endpoints compartilham regras em TypeScript para valores, etapas do orçamento e datas de retorno. Vite e vinext preparam a aplicação para o ambiente Cloudflare Workers.</dd>
-  </div>
-<div>
-    <dt>Consultas ao banco</dt>
-    <dd>O Drizzle mapeia orçamentos e configurações para o Cloudflare D1, baseado em SQLite. Um índice composto por responsável e data de retorno atende à fila cronológica de cada prestador.</dd>
-  </div>
-<div>
-    <dt>Edições concorrentes</dt>
-    <dd>Ao atualizar um orçamento, a API inclui na operação a data de alteração que acabou de ler. Se outra requisição modificar o registro nesse intervalo, a API devolve HTTP 409.</dd>
-  </div>
-<div>
-    <dt>Testes de importação</dt>
-    <dd>Os testes em Node.js exercitam os endpoints com um banco SQLite local. Um deles simula uma falha durante a importação em lote e verifica que os orçamentos anteriores continuam intactos.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Montagem da fila de retornos</figcaption>
+          <ol role="list"><li>
+    <strong>Salvar o orçamento</strong><span>Responsável e data de retorno</span>
+  </li>
+<li>
+    <strong>Ordenar por data</strong><span>Drizzle e Cloudflare D1</span>
+  </li>
+<li>
+    <strong>Listar os retornos</strong><span>Painel ordenado por data</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">O servidor guarda os valores em centavos inteiros e interpreta as datas no fuso de São Paulo. O total e o dia de retorno mantêm o mesmo significado quando o painel é reaberto.</p>
+          <div class="engineering-notes"><details open>
+    <summary>React e TypeScript<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>O painel em React e os endpoints compartilham regras em TypeScript para valores, etapas do orçamento e datas de retorno. Vite e vinext preparam a aplicação para o ambiente Cloudflare Workers.</p>
+  </details>
+<details>
+    <summary>Consultas ao banco<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>O Drizzle mapeia orçamentos e configurações para o Cloudflare D1, baseado em SQLite. Um índice composto por responsável e data de retorno atende à fila cronológica de cada prestador.</p>
+  </details>
+<details>
+    <summary>Edições concorrentes<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Ao atualizar um orçamento, a API inclui na operação a data de alteração que acabou de ler. Se outra requisição modificar o registro nesse intervalo, a API devolve HTTP 409.</p>
+  </details>
+<details>
+    <summary>Testes de importação<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Os testes em Node.js exercitam os endpoints com um banco SQLite local. Um deles simula uma falha durante a importação em lote e verifica que os orçamentos anteriores continuam intactos.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

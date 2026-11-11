@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/apps/retoma/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -67,25 +67,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Engineering details</h2>
-      <p class="engineering-intro">The server stores amounts as integer cents and interprets follow-up dates in the São Paulo time zone. The total and due date keep the same meaning when the dashboard is reopened.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>React and TypeScript</dt>
-    <dd>The React dashboard and API handlers share TypeScript rules for quote status, money and follow-up dates. Vite and vinext build the application for the Cloudflare Workers runtime.</dd>
-  </div>
-<div>
-    <dt>Query design</dt>
-    <dd>Drizzle maps quotes and settings to Cloudflare D1, a SQLite database. A composite index on owner and follow-up date supports the date-ordered queue for each contractor.</dd>
-  </div>
-<div>
-    <dt>Concurrent edits</dt>
-    <dd>When updating a quote, the API includes its last-read timestamp in the database update. If another request changes the record in the meantime, the API returns HTTP 409.</dd>
-  </div>
-<div>
-    <dt>Testing failed imports</dt>
-    <dd>The Node.js test suite exercises the API handlers against a local SQLite fixture. One test injects a failure during a batch import and checks that the original quotes remain intact.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Engineering details<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Building the follow-up queue</figcaption>
+          <ol role="list"><li>
+    <strong>Save a quote</strong><span>Owner and follow-up date</span>
+  </li>
+<li>
+    <strong>Sort by date</strong><span>Drizzle and Cloudflare D1</span>
+  </li>
+<li>
+    <strong>Show due follow-ups</strong><span>Dashboard ordered by date</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">The server stores amounts as integer cents and interprets follow-up dates in the São Paulo time zone. The total and due date keep the same meaning when the dashboard is reopened.</p>
+          <div class="engineering-notes"><details open>
+    <summary>React and TypeScript<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>The React dashboard and API handlers share TypeScript rules for quote status, money and follow-up dates. Vite and vinext build the application for the Cloudflare Workers runtime.</p>
+  </details>
+<details>
+    <summary>Query design<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Drizzle maps quotes and settings to Cloudflare D1, a SQLite database. A composite index on owner and follow-up date supports the date-ordered queue for each contractor.</p>
+  </details>
+<details>
+    <summary>Concurrent edits<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>When updating a quote, the API includes its last-read timestamp in the database update. If another request changes the record in the meantime, the API returns HTTP 409.</p>
+  </details>
+<details>
+    <summary>Testing failed imports<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>The Node.js test suite exercises the API handlers against a local SQLite fixture. One test injects a failure during a batch import and checks that the original quotes remain intact.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

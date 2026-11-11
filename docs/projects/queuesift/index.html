@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/projects/queuesift/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
   </head>
   <body>
@@ -68,21 +68,37 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Engineering details</h2>
+      <h2 id="engineering" tabindex="-1">Engineering details<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Reviewing failed deliveries</figcaption>
+          <ol role="list"><li>
+    <strong>Import the records</strong><span>Messages and processing receipts</span>
+  </li>
+<li>
+    <strong>Group deliveries</strong><span>Tenant and event ID</span>
+  </li>
+<li>
+    <strong>Review the decision</strong><span>Candidate, hold or exclude</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
 
-      <dl class="engineering-notes notes-3"><div>
-    <dt>Transactional imports</dt>
-    <dd>A Kotlin CLI on Java 21 imports messages, processing receipts and optional checkpoints into SQLite in one transaction. It stores source line numbers and SHA-256 hashes so reviewers can locate the input behind a decision.</dd>
-  </div>
-<div>
-    <dt>Identity and ordering</dt>
-    <dd>The recovery engine groups deliveries by tenant and event ID. Conflicting payloads put every copy on hold. For an ordered stream, a missing sequence number blocks later candidates until the gap is resolved.</dd>
-  </div>
-<div>
-    <dt>Agent access and tests</dt>
-    <dd>A read-only MCP server exposes the decisions and their evidence. JUnit tests check that collection queries omit message payloads and that inspecting a payload requires explicit permission at server startup.</dd>
-  </div></dl>
-      <p class="engineering-files"><span>Source and tests</span> <a class="text-link" href="https://github.com/Almeida96/queuesift/blob/1fbc0e9458ee575808d2097f88bb600318998521/src/main/kotlin/io/github/almeida96/queuesift/RecoveryEngine.kt">RecoveryEngine.kt <span aria-hidden="true" class="arrow">↗</span></a> <a class="text-link" href="https://github.com/Almeida96/queuesift/blob/1fbc0e9458ee575808d2097f88bb600318998521/src/test/kotlin/io/github/almeida96/queuesift/RecoveryEngineTests.kt">RecoveryEngineTests.kt <span aria-hidden="true" class="arrow">↗</span></a></p>
+          <div class="engineering-notes"><details open>
+    <summary>Transactional imports<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>A Kotlin CLI on Java 21 imports messages, processing receipts and optional checkpoints into SQLite in one transaction. It stores source line numbers and SHA-256 hashes so reviewers can locate the input behind a decision.</p>
+  </details>
+<details>
+    <summary>Identity and ordering<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>The recovery engine groups deliveries by tenant and event ID. Conflicting payloads put every copy on hold. For an ordered stream, a missing sequence number blocks later candidates until the gap is resolved.</p>
+  </details>
+<details>
+    <summary>Agent access and tests<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>A read-only MCP server exposes the decisions and their evidence. JUnit tests check that collection queries omit message payloads and that inspecting a payload requires explicit permission at server startup.</p>
+  </details></div>
+          <div class="engineering-files"><span>Source and tests</span><div><a class="text-link" href="https://github.com/Almeida96/queuesift/blob/1fbc0e9458ee575808d2097f88bb600318998521/src/main/kotlin/io/github/almeida96/queuesift/RecoveryEngine.kt">RecoveryEngine.kt <span aria-hidden="true" class="arrow">↗</span></a> <a class="text-link" href="https://github.com/Almeida96/queuesift/blob/1fbc0e9458ee575808d2097f88bb600318998521/src/test/kotlin/io/github/almeida96/queuesift/RecoveryEngineTests.kt">RecoveryEngineTests.kt <span aria-hidden="true" class="arrow">↗</span></a></div></div>
+        </div>
+      </div>
     </div>
   </section>
     <div class="case-detail">

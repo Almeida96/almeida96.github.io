@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/apps/jiu-jitsu-academy/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -67,21 +67,37 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Engineering details</h2>
-      <p class="engineering-intro">Each invitation is tied to an academy. The server checks the instructor’s academy before accepting a promotion, keeping student records scoped to the school that manages them.</p>
-      <dl class="engineering-notes notes-3"><div>
-    <dt>TypeScript across mobile and web</dt>
-    <dd>The directory and instructor screens use React Native and Expo. Native builds keep the session token in Expo SecureStore, while the browser export keeps it in session storage.</dd>
-  </div>
-<div>
-    <dt>Node.js and SQLite</dt>
-    <dd>The TypeScript API uses Node’s HTTP server and built-in SQLite driver. Account changes run inside database transactions so a failed operation can roll back its writes.</dd>
-  </div>
-<div>
-    <dt>Invitations and access tests</dt>
-    <dd>An invitation specifies the academy and role the recipient can join. Tests with Node’s test runner check that a used invitation cannot be redeemed twice and a recipient cannot promote their own account.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Engineering details<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Joining an academy</figcaption>
+          <ol role="list"><li>
+    <strong>Issue an invitation</strong><span>Academy and assigned role</span>
+  </li>
+<li>
+    <strong>Redeem the invitation</strong><span>Single-use invitation code</span>
+  </li>
+<li>
+    <strong>Grant membership</strong><span>Access within that academy</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">Each invitation is tied to an academy. The server checks the instructor’s academy before accepting a promotion, keeping student records scoped to the school that manages them.</p>
+          <div class="engineering-notes"><details open>
+    <summary>TypeScript across mobile and web<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>The directory and instructor screens use React Native and Expo. Native builds keep the session token in Expo SecureStore, while the browser export keeps it in session storage.</p>
+  </details>
+<details>
+    <summary>Node.js and SQLite<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>The TypeScript API uses Node’s HTTP server and built-in SQLite driver. Account changes run inside database transactions so a failed operation can roll back its writes.</p>
+  </details>
+<details>
+    <summary>Invitations and access tests<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>An invitation specifies the academy and role the recipient can join. Tests with Node’s test runner check that a used invitation cannot be redeemed twice and a recipient cannot promote their own account.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

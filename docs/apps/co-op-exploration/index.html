@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/apps/co-op-exploration/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -67,21 +67,37 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Engineering details</h2>
-      <p class="engineering-intro">The server decides whether an explorer can take damage, checking the character’s location and state. Players at base stay protected while teammates can still be in danger outside.</p>
-      <dl class="engineering-notes notes-3"><div>
-    <dt>C++ and Unreal networking</dt>
-    <dd>The scanner runs in a C++ actor component. Clients send scan input through a remote procedure call. The server checks range, aim and line of sight before accepting a target.</dd>
-  </div>
-<div>
-    <dt>Private and shared state</dt>
-    <dd>Unreal’s owner-only replication sends scan progress and journal entries to the player who made the observation. Shared equipment, such as a portable light, has a separate network lifecycle that other players can observe.</dd>
-  </div>
-<div>
-    <dt>Two-process network tests</dt>
-    <dd>A PowerShell harness starts separate Unreal host and client processes. The scenario cancels a scan, completes a discovery and checks what each player sees when a shared light is deployed and expires.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Engineering details<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Scanning a creature</figcaption>
+          <ol role="list"><li>
+    <strong>Start the scan</strong><span>Client RPC to server</span>
+  </li>
+<li>
+    <strong>Validate the target</strong><span>Range, aim and visibility</span>
+  </li>
+<li>
+    <strong>Update the journal</strong><span>Owner-only Unreal replication</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">The server decides whether an explorer can take damage, checking the character’s location and state. Players at base stay protected while teammates can still be in danger outside.</p>
+          <div class="engineering-notes"><details open>
+    <summary>C++ and Unreal networking<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>The scanner runs in a C++ actor component. Clients send scan input through a remote procedure call. The server checks range, aim and line of sight before accepting a target.</p>
+  </details>
+<details>
+    <summary>Private and shared state<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Unreal’s owner-only replication sends scan progress and journal entries to the player who made the observation. Shared equipment, such as a portable light, has a separate network lifecycle that other players can observe.</p>
+  </details>
+<details>
+    <summary>Two-process network tests<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>A PowerShell harness starts separate Unreal host and client processes. The scenario cancels a scan, completes a discovery and checks what each player sees when a shared light is deployed and expires.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

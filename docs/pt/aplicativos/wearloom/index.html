@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/pt/aplicativos/wearloom/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -72,25 +72,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
-      <p class="engineering-intro">Depois de baixar os modelos, a prévia para Android consegue classificar a peça no aparelho. O guarda-roupa preserva a foto original para que a pessoa possa corrigir a sugestão ou manter o enquadramento.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>Aplicativo móvel</dt>
-    <dd>TypeScript e React Native sustentam o guarda-roupa, o editor de looks e o calendário. O Expo Image Picker recebe a foto da câmera ou da galeria, e o Expo Image Manipulator a comprime antes de salvá-la.</dd>
-  </div>
-<div>
-    <dt>Inferência no aparelho</dt>
-    <dd>No Android, o ONNX Runtime carrega quando a pessoa pede o reconhecimento. A CPU executa os modelos em sequência e libera cada sessão ao terminar. Se a segmentação falhar, o app pode preservar a categoria já identificada.</dd>
-  </div>
-<div>
-    <dt>Armazenamento local</dt>
-    <dd>O catálogo fica no AsyncStorage. As fotografias comprimidas ficam no diretório de documentos do aplicativo. O catálogo guarda referências que permitem localizar as imagens novamente quando a pessoa reabre o armário.</dd>
-  </div>
-<div>
-    <dt>Integridade dos modelos</dt>
-    <dd>Um módulo Java calcula o SHA-256 dos modelos baixados lendo o arquivo em blocos. Os testes exercitam o código Java e a alternativa para aparelhos sem o módulo, cobrindo leituras interrompidas e hashes malformados.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Cadastro de uma peça</figcaption>
+          <ol role="list"><li>
+    <strong>Escolher a foto</strong><span>Câmera ou galeria</span>
+  </li>
+<li>
+    <strong>Identificar a peça</strong><span>Inferência ONNX no aparelho</span>
+  </li>
+<li>
+    <strong>Salvar no armário</strong><span>Foto e categoria confirmada</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">Depois de baixar os modelos, a prévia para Android consegue classificar a peça no aparelho. O guarda-roupa preserva a foto original para que a pessoa possa corrigir a sugestão ou manter o enquadramento.</p>
+          <div class="engineering-notes"><details open>
+    <summary>Aplicativo móvel<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>TypeScript e React Native sustentam o guarda-roupa, o editor de looks e o calendário. O Expo Image Picker recebe a foto da câmera ou da galeria, e o Expo Image Manipulator a comprime antes de salvá-la.</p>
+  </details>
+<details>
+    <summary>Inferência no aparelho<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>No Android, o ONNX Runtime carrega quando a pessoa pede o reconhecimento. A CPU executa os modelos em sequência e libera cada sessão ao terminar. Se a segmentação falhar, o app pode preservar a categoria já identificada.</p>
+  </details>
+<details>
+    <summary>Armazenamento local<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>O catálogo fica no AsyncStorage. As fotografias comprimidas ficam no diretório de documentos do aplicativo. O catálogo guarda referências que permitem localizar as imagens novamente quando a pessoa reabre o armário.</p>
+  </details>
+<details>
+    <summary>Integridade dos modelos<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Um módulo Java calcula o SHA-256 dos modelos baixados lendo o arquivo em blocos. Os testes exercitam o código Java e a alternativa para aparelhos sem o módulo, cobrindo leituras interrompidas e hashes malformados.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

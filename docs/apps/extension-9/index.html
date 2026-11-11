@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/apps/extension-9/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -67,25 +67,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Engineering details</h2>
-      <p class="engineering-intro">Each task has an in-memory checkpoint. After a capture, the player can retry the current call. Opening the notebook pauses the threat long enough to read a clue.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>Unreal Engine and C++</dt>
-    <dd>A C++ game mode tracks incoming calls, objectives and endings. A separate HUD draws the notebook and subtitles from that state, keeping the dialogue and the current task in sync.</dd>
-  </div>
-<div>
-    <dt>Visibility and collision</dt>
-    <dd>Before the threat can capture the player, the game traces a line from the first-person camera toward it. A wall blocking the visibility trace can interrupt an encounter in the corridor.</dd>
-  </div>
-<div>
-    <dt>Audio tools</dt>
-    <dd>A Python script synthesizes temporary sound effects as WAV files. The telephone ring combines two tones with timed gaps, and a fixed random seed makes noisy effects repeatable across builds.</dd>
-  </div>
-<div>
-    <dt>Gameplay checks on Windows</dt>
-    <dd>A PowerShell runner starts Unreal unattended to check checkpoints, captures and both endings. It can run the same checks against the packaged Windows build and capture frames for visual review.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Engineering details<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Following a call</figcaption>
+          <ol role="list"><li>
+    <strong>Answer the phone</strong><span>First-person player input</span>
+  </li>
+<li>
+    <strong>Update the objective</strong><span>Unreal C++ game mode</span>
+  </li>
+<li>
+    <strong>Read the clue</strong><span>HUD subtitles and notebook</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">Each task has an in-memory checkpoint. After a capture, the player can retry the current call. Opening the notebook pauses the threat long enough to read a clue.</p>
+          <div class="engineering-notes"><details open>
+    <summary>Unreal Engine and C++<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>A C++ game mode tracks incoming calls, objectives and endings. A separate HUD draws the notebook and subtitles from that state, keeping the dialogue and the current task in sync.</p>
+  </details>
+<details>
+    <summary>Visibility and collision<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Before the threat can capture the player, the game traces a line from the first-person camera toward it. A wall blocking the visibility trace can interrupt an encounter in the corridor.</p>
+  </details>
+<details>
+    <summary>Audio tools<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>A Python script synthesizes temporary sound effects as WAV files. The telephone ring combines two tones with timed gaps, and a fixed random seed makes noisy effects repeatable across builds.</p>
+  </details>
+<details>
+    <summary>Gameplay checks on Windows<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>A PowerShell runner starts Unreal unattended to check checkpoints, captures and both endings. It can run the same checks against the packaged Windows build and capture frames for visual review.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

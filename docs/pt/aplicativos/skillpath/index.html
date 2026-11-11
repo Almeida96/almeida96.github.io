@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/pt/aplicativos/skillpath/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -72,25 +72,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
-      <p class="engineering-intro">Cada tentativa fica registrada como uma medição própria. O histórico preserva as séries anteriores ao lado do resultado mais recente, junto com as anotações sobre as condições do treino.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>Aplicativo móvel</dt>
-    <dd>O cliente em TypeScript usa React Native e Expo Router nas telas de treino e histórico. Comandos de domínio registram cada tentativa separadamente da interface, o que permite testar as regras de pontuação em Node.js.</dd>
-  </div>
-<div>
-    <dt>Armazenamento offline</dt>
-    <dd>No celular, o espaço de prática fica no armazenamento chave-valor do Expo SQLite. Um repositório enfileira as alterações e valida os dados na leitura. Se a validação falhar, preserva o conteúdo para recuperação.</dd>
-  </div>
-<div>
-    <dt>Sincronização opcional</dt>
-    <dd>Com o Supabase configurado, o PostgreSQL confere a revisão enviada pelo aparelho antes de aceitar a gravação. O app compara a versão comum com as alterações de cada dispositivo e sinaliza edições conflitantes no mesmo campo.</dd>
-  </div>
-<div>
-    <dt>Testes de concorrência</dt>
-    <dd>Os testes em Node.js cobrem metas editadas offline em dois aparelhos, exclusão simultânea a uma edição e dois registros do mesmo treino agendado. No último caso, a pessoa escolhe qual tentativa preservar.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Registro de um treino</figcaption>
+          <ol role="list"><li>
+    <strong>Registrar o placar</strong><span>Acertos em dez lances livres</span>
+  </li>
+<li>
+    <strong>Salvar a tentativa</strong><span>Armazenamento local com Expo SQLite</span>
+  </li>
+<li>
+    <strong>Comparar os treinos</strong><span>Resultado anterior e atual</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">Cada tentativa fica registrada como uma medição própria. O histórico preserva as séries anteriores ao lado do resultado mais recente, junto com as anotações sobre as condições do treino.</p>
+          <div class="engineering-notes"><details open>
+    <summary>Aplicativo móvel<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>O cliente em TypeScript usa React Native e Expo Router nas telas de treino e histórico. Comandos de domínio registram cada tentativa separadamente da interface, o que permite testar as regras de pontuação em Node.js.</p>
+  </details>
+<details>
+    <summary>Armazenamento offline<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>No celular, o espaço de prática fica no armazenamento chave-valor do Expo SQLite. Um repositório enfileira as alterações e valida os dados na leitura. Se a validação falhar, preserva o conteúdo para recuperação.</p>
+  </details>
+<details>
+    <summary>Sincronização opcional<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Com o Supabase configurado, o PostgreSQL confere a revisão enviada pelo aparelho antes de aceitar a gravação. O app compara a versão comum com as alterações de cada dispositivo e sinaliza edições conflitantes no mesmo campo.</p>
+  </details>
+<details>
+    <summary>Testes de concorrência<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Os testes em Node.js cobrem metas editadas offline em dois aparelhos, exclusão simultânea a uma edição e dois registros do mesmo treino agendado. No último caso, a pessoa escolhe qual tentativa preservar.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

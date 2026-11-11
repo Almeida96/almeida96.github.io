@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/apps/wearloom/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -72,25 +72,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Engineering details</h2>
-      <p class="engineering-intro">Once its models are downloaded, the Android preview can classify a garment on the device. The wardrobe keeps the original photo so the wearer can correct a suggestion or keep the original framing.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>Mobile stack</dt>
-    <dd>TypeScript and React Native handle the wardrobe, outfit editor and calendar. Expo Image Picker supplies a photo from the camera or gallery, and Expo Image Manipulator compresses the image before storage.</dd>
-  </div>
-<div>
-    <dt>On-device inference</dt>
-    <dd>On Android, an explicit recognition request loads ONNX Runtime. The CPU runs the models sequentially and releases each session after inference. If segmentation fails, the app can keep the garment category it already identified.</dd>
-  </div>
-<div>
-    <dt>Local storage</dt>
-    <dd>AsyncStorage holds the wardrobe catalogue. Compressed photographs live in the app’s document directory. The catalogue stores portable references so it can resolve the photo paths again when the app opens.</dd>
-  </div>
-<div>
-    <dt>Model integrity</dt>
-    <dd>A native Java module streams downloaded model files through SHA-256. Automated tests exercise the Java implementation and check the fallback for devices without the module, including interrupted reads and malformed digests.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Engineering details<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Adding a garment</figcaption>
+          <ol role="list"><li>
+    <strong>Choose a photo</strong><span>Camera or gallery</span>
+  </li>
+<li>
+    <strong>Identify the garment</strong><span>On-device ONNX inference</span>
+  </li>
+<li>
+    <strong>Save the piece</strong><span>Photo and confirmed category</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">Once its models are downloaded, the Android preview can classify a garment on the device. The wardrobe keeps the original photo so the wearer can correct a suggestion or keep the original framing.</p>
+          <div class="engineering-notes"><details open>
+    <summary>Mobile stack<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>TypeScript and React Native handle the wardrobe, outfit editor and calendar. Expo Image Picker supplies a photo from the camera or gallery, and Expo Image Manipulator compresses the image before storage.</p>
+  </details>
+<details>
+    <summary>On-device inference<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>On Android, an explicit recognition request loads ONNX Runtime. The CPU runs the models sequentially and releases each session after inference. If segmentation fails, the app can keep the garment category it already identified.</p>
+  </details>
+<details>
+    <summary>Local storage<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>AsyncStorage holds the wardrobe catalogue. Compressed photographs live in the app’s document directory. The catalogue stores portable references so it can resolve the photo paths again when the app opens.</p>
+  </details>
+<details>
+    <summary>Model integrity<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>A native Java module streams downloaded model files through SHA-256. Automated tests exercise the Java implementation and check the fallback for devices without the module, including interrupted reads and malformed digests.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">

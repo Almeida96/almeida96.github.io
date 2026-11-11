@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/pt/projetos/queuesift/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
   </head>
   <body>
@@ -68,21 +68,37 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Revisão de entregas com falha</figcaption>
+          <ol role="list"><li>
+    <strong>Importar registros</strong><span>Mensagens e comprovantes de processamento</span>
+  </li>
+<li>
+    <strong>Agrupar as entregas</strong><span>Tenant e identificador do evento</span>
+  </li>
+<li>
+    <strong>Conferir a decisão</strong><span>Candidata, retida ou excluída</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
 
-      <dl class="engineering-notes notes-3"><div>
-    <dt>Importação transacional</dt>
-    <dd>Uma CLI em Kotlin na JVM 21 importa mensagens, comprovantes de processamento e checkpoints opcionais em uma transação SQLite. Números de linha e hashes SHA-256 permitem localizar os registros que sustentam cada decisão.</dd>
-  </div>
-<div>
-    <dt>Identidade e ordenação</dt>
-    <dd>O motor agrupa entregas por tenant e identificador do evento. Conteúdos divergentes retêm todas as cópias. Em um fluxo ordenado, uma lacuna na sequência impede que eventos posteriores entrem no lote de reenvio.</dd>
-  </div>
-<div>
-    <dt>Acesso por agentes e testes</dt>
-    <dd>Um servidor MCP de leitura expõe as decisões e suas evidências. Testes com JUnit verificam que as listagens omitem o conteúdo das mensagens e que sua inspeção exige permissão explícita ao iniciar o servidor.</dd>
-  </div></dl>
-      <p class="engineering-files"><span>Código e testes</span> <a class="text-link" href="https://github.com/Almeida96/queuesift/blob/1fbc0e9458ee575808d2097f88bb600318998521/src/main/kotlin/io/github/almeida96/queuesift/RecoveryEngine.kt">RecoveryEngine.kt <span aria-hidden="true" class="arrow">↗</span></a> <a class="text-link" href="https://github.com/Almeida96/queuesift/blob/1fbc0e9458ee575808d2097f88bb600318998521/src/test/kotlin/io/github/almeida96/queuesift/RecoveryEngineTests.kt">RecoveryEngineTests.kt <span aria-hidden="true" class="arrow">↗</span></a></p>
+          <div class="engineering-notes"><details open>
+    <summary>Importação transacional<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Uma CLI em Kotlin na JVM 21 importa mensagens, comprovantes de processamento e checkpoints opcionais em uma transação SQLite. Números de linha e hashes SHA-256 permitem localizar os registros que sustentam cada decisão.</p>
+  </details>
+<details>
+    <summary>Identidade e ordenação<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>O motor agrupa entregas por tenant e identificador do evento. Conteúdos divergentes retêm todas as cópias. Em um fluxo ordenado, uma lacuna na sequência impede que eventos posteriores entrem no lote de reenvio.</p>
+  </details>
+<details>
+    <summary>Acesso por agentes e testes<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Um servidor MCP de leitura expõe as decisões e suas evidências. Testes com JUnit verificam que as listagens omitem o conteúdo das mensagens e que sua inspeção exige permissão explícita ao iniciar o servidor.</p>
+  </details></div>
+          <div class="engineering-files"><span>Código e testes</span><div><a class="text-link" href="https://github.com/Almeida96/queuesift/blob/1fbc0e9458ee575808d2097f88bb600318998521/src/main/kotlin/io/github/almeida96/queuesift/RecoveryEngine.kt">RecoveryEngine.kt <span aria-hidden="true" class="arrow">↗</span></a> <a class="text-link" href="https://github.com/Almeida96/queuesift/blob/1fbc0e9458ee575808d2097f88bb600318998521/src/test/kotlin/io/github/almeida96/queuesift/RecoveryEngineTests.kt">RecoveryEngineTests.kt <span aria-hidden="true" class="arrow">↗</span></a></div></div>
+        </div>
+      </div>
     </div>
   </section>
     <div class="case-detail">

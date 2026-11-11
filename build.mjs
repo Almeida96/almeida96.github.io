@@ -1,4 +1,5 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { caseStudies as previousStudies } from './cases.mjs';
@@ -8,9 +9,12 @@ import { appIndex } from './app-index.mjs';
 import { appStudies } from './app-studies.mjs';
 import { appMedia } from './app-media.mjs';
 import { engineeringNotes } from './engineering-notes.mjs';
+import { engineeringFlows } from './engineering-flows.mjs';
 
 const args = process.argv.slice(2);
 const dist = fileURLToPath(new URL(args.includes('--pages') ? './docs/' : './dist/', import.meta.url));
+const stylesheet = await readFile(join(dist, 'assets', 'site.css'), 'utf8');
+const styleVersion = createHash('sha256').update(stylesheet.replaceAll('\r\n', '\n')).digest('hex').slice(0, 12);
 const origin = args.find(arg => arg !== '--pages') || 'https://almeida96.github.io';
 const linkedin = 'https://www.linkedin.com/in/igors-almeida/';
 const github = 'https://github.com/Almeida96';
@@ -179,7 +183,7 @@ function shell(language, slug, body) {
     <meta property="og:url" content="${url}">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=${styleVersion}">
     <script src="/assets/nav.js" defer></script>${app ? '\n    <script src="/assets/gallery.js" defer></script>' : ''}
   </head>
   <body>
@@ -470,18 +474,29 @@ function engineeringTitle(language) {
 
 function engineeringSection(language, slug, introduction = '') {
   const engineering = engineeringNotes[slug];
-  const notes = engineering[language];
-  const items = notes.map(note => `<div>
-    <dt>${escape(note.label)}</dt>
-    <dd>${escape(note.text)}</dd>
-  </div>`).join('\n');
+  const flow = engineeringFlows[slug][language];
+  const stages = flow.steps.map(([action, tool]) => `<li>
+    <strong>${escape(action)}</strong><span>${escape(tool)}</span>
+  </li>`).join('\n');
+  const items = engineering[language].map((note, index) => `<details${index === 0 ? ' open' : ''}>
+    <summary>${escape(note.label)}<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>${escape(note.text)}</p>
+  </details>`).join('\n');
   const files = engineering.files?.map(url => link(url, url.split('/').pop(), 'text-link')).join(' ');
   return `<section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">${engineeringTitle(language)}</h2>
-      ${introduction ? `<p class="engineering-intro">${escape(introduction)}</p>` : ''}
-      <dl class="engineering-notes notes-${notes.length}">${items}</dl>
-      ${files ? `<p class="engineering-files"><span>${language === 'en' ? 'Source and tests' : 'Código e testes'}</span> ${files}</p>` : ''}
+      <h2 id="engineering" tabindex="-1">${engineeringTitle(language)}<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>${escape(flow.title)}</figcaption>
+          <ol role="list">${stages}</ol>
+        </figure>
+        <div class="engineering-reading">
+          ${introduction ? `<p class="engineering-intro">${escape(introduction)}</p>` : ''}
+          <div class="engineering-notes">${items}</div>
+          ${files ? `<div class="engineering-files"><span>${language === 'en' ? 'Source and tests' : 'Código e testes'}</span><div>${files}</div></div>` : ''}
+        </div>
+      </div>
     </div>
   </section>`;
 }

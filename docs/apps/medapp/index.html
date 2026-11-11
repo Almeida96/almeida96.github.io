@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://almeida96.github.io/apps/medapp/">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/site.css?v=cfbbeb69cb4d">
     <script src="/assets/nav.js" defer></script>
     <script src="/assets/gallery.js" defer></script>
   </head>
@@ -67,25 +67,41 @@
     </div>
     <section class="engineering" aria-labelledby="engineering">
     <div class="wrap">
-      <h2 id="engineering" tabindex="-1">Engineering details</h2>
-      <p class="engineering-intro">The server checks the proposed visits against existing appointments and blocked hours. It saves the series together so a conflict on the last date cannot leave half a schedule booked.</p>
-      <dl class="engineering-notes notes-4"><div>
-    <dt>Client and API</dt>
-    <dd>The mobile client uses TypeScript, React Native and Expo. A JavaScript API built on Node.js handles calendar requests. On the device, Expo SecureStore holds the session token used for authenticated requests.</dd>
-  </div>
-<div>
-    <dt>Persistence model</dt>
-    <dd>The prototype runs a single API process backed by a JSON file. Writes enter a queue, update a copy of the state and replace the file before the new state becomes visible to other requests.</dd>
-  </div>
-<div>
-    <dt>Safe booking retries</dt>
-    <dd>A recurring booking carries a request ID. Retrying the same request returns the existing series, even after a restart. Reusing its ID with different dates or rules produces an HTTP 409 conflict.</dd>
-  </div>
-<div>
-    <dt>Calendar tests</dt>
-    <dd>Node.js tests submit two series competing for the same slots and introduce a conflict on a later visit. Other cases exercise daylight saving transitions, when a requested local time can disappear from the calendar.</dd>
-  </div></dl>
+      <h2 id="engineering" tabindex="-1">Engineering details<span aria-hidden="true">.</span></h2>
+      <div class="engineering-layout">
+        <figure class="engineering-flow">
+          <figcaption>Booking recurring visits</figcaption>
+          <ol role="list"><li>
+    <strong>Propose the dates</strong><span>Patient, time and recurrence</span>
+  </li>
+<li>
+    <strong>Check each slot</strong><span>Bookings and blocked hours</span>
+  </li>
+<li>
+    <strong>Save the series</strong><span>One queued write</span>
+  </li></ol>
+        </figure>
+        <div class="engineering-reading">
+          <p class="engineering-intro">The server checks the proposed visits against existing appointments and blocked hours. It saves the series together so a conflict on the last date cannot leave half a schedule booked.</p>
+          <div class="engineering-notes"><details open>
+    <summary>Client and API<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>The mobile client uses TypeScript, React Native and Expo. A JavaScript API built on Node.js handles calendar requests. On the device, Expo SecureStore holds the session token used for authenticated requests.</p>
+  </details>
+<details>
+    <summary>Persistence model<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>The prototype runs a single API process backed by a JSON file. Writes enter a queue, update a copy of the state and replace the file before the new state becomes visible to other requests.</p>
+  </details>
+<details>
+    <summary>Safe booking retries<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>A recurring booking carries a request ID. Retrying the same request returns the existing series, even after a restart. Reusing its ID with different dates or rules produces an HTTP 409 conflict.</p>
+  </details>
+<details>
+    <summary>Calendar tests<span class="disclosure-icon" aria-hidden="true"></span></summary>
+    <p>Node.js tests submit two series competing for the same slots and introduce a conflict on a later visit. Other cases exercise daylight saving transitions, when a requested local time can disappear from the calendar.</p>
+  </details></div>
 
+        </div>
+      </div>
     </div>
   </section>
     <section class="product-notes"><div class="wrap product-columns">
