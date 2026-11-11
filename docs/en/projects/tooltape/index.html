@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f0">
+    <title>ToolTape — Igor Almeida</title>
+    <meta name="description" content="I record an agent's tool calls to replay the responses and review changes to an MCP server.">
+    <link rel="canonical" href="https://almeida96.github.io/projects/tooltape/">
+    <link rel="alternate" hreflang="en" href="https://almeida96.github.io/projects/tooltape/">
+    <link rel="alternate" hreflang="pt-BR" href="https://almeida96.github.io/pt/projetos/tooltape/">
+    <link rel="alternate" hreflang="x-default" href="https://almeida96.github.io/projects/tooltape/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ToolTape — Igor Almeida">
+    <meta property="og:description" content="I record an agent's tool calls to replay the responses and review changes to an MCP server.">
+    <meta property="og:image" content="https://almeida96.github.io/assets/igor-profile.jpg">
+    <meta property="og:url" content="https://almeida96.github.io/projects/tooltape/">
+    <link rel="icon" href="/favicon.png">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/nav.js" defer></script>
+  </head>
+  <body>
+
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="identity" href="/" aria-label="Igor Almeida">
+          <span class="monogram" aria-hidden="true">ia<span>.</span></span><span>Igor Almeida</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Menu"><a href="/#projects">Projects</a>
+<a href="/#apps">Apps</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a></nav>
+        <div class="header-end">
+          <nav class="languages" aria-label="Language"><a lang="en" hreflang="en" aria-current="page" href="/projects/tooltape/">EN</a><i aria-hidden="true">/</i><a lang="pt-BR" hreflang="pt-BR" href="/pt/projetos/tooltape/">PT</a></nav>
+          <details class="mobile-menu">
+            <summary>Menu <span aria-hidden="true">☰</span></summary>
+            <nav aria-label="Menu"><a href="/#projects">Projects</a>
+<a href="/#apps">Apps</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a></nav>
+          </details>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+    <div class="wrap case-top">
+      <a class="back" href="/#projects"><span aria-hidden="true" class="arrow">←</span> Back to projects</a>
+      <div class="case-heading">
+        <div>
+          <p class="hero-overline"><span class="orange-rule"></span>Case study / Agent tooling</p>
+          <h1>ToolTape<span>.</span></h1>
+          <p class="case-lead">I record an agent's tool calls to replay the responses and review changes to an MCP server.</p>
+          <div class="case-actions">
+            <a class="button" href="https://github.com/Almeida96/tooltape">Source on GitHub <span aria-hidden="true" class="arrow">↗</span></a>
+            <a class="text-link" href="https://github.com/Almeida96/tooltape/releases/tag/v0.1.0">Download release <span aria-hidden="true" class="arrow">↗</span></a>
+          </div>
+        </div>
+        <div class="case-visual"><div class="visual tape-art" aria-hidden="true">
+    <div class="visual-top"><span>Session comparison</span><b>MCP</b></div>
+    <div class="tape-field">ticket.priority</div>
+    <div class="tape-values"><b>P2</b><span>→</span><b>P1</b></div>
+    <div class="visual-foot"><span>INC-1042</span><b>tools/call</b></div>
+  </div><p>Project example</p></div>
+      </div>
+    </div>
+    <div class="case-detail">
+      <div class="wrap detail-grid">
+        <aside class="tech"><h2>Technology</h2><span>Java 21</span><span>MCP</span><span>JSON-RPC</span></aside>
+        <div class="case-prose"><section>
+    <h2>The problem</h2>
+    <p>An agent test can fail because a service returns different data on the next run. Reproducing the failure requires the arguments, responses and call order that the agent saw.</p>
+
+  </section>
+<section>
+    <h2>How it works</h2>
+    <p>ToolTape records a sequence of MCP calls and preserves their results and errors in a JSON file. A local server replays that session. Comparing two recordings produces a report with the path to each changed field.</p>
+
+  </section>
+<section>
+    <h2>Inside the example</h2>
+    <p>In the synthetic support-ticket demo, two recordings of the same three calls produce six differences. Ticket INC-1042 changes priority from P2 to P1 and status from investigating to resolved. The report points to both values in the original recordings.</p>
+
+  </section>
+<section>
+    <h2>Limits of the analysis</h2>
+    <p>Replay follows the recorded order and arguments. An agent that chooses another tool or sequence needs its own scenario.</p>
+
+  </section><figure>
+    <a href="/assets/evidence/tooltape-comparison.jpg">
+      <img width="1060" loading="lazy" src="/assets/evidence/tooltape-comparison.jpg" alt="ToolTape comparison report showing two tools, three recorded calls and six differences between sessions.">
+    </a>
+    <figcaption>Report generated from the project’s example data.</figcaption>
+  </figure><section>
+    <h2>Run the example</h2>
+
+    <pre><code>bin/tooltape demo --dir demo-output</code></pre>
+
+  </section></div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <span class="eyebrow">Next project</span>
+      <a class="" href="/projects/queuesift/">QueueSift <span aria-hidden="true" class="arrow">→</span></a>
+    </div>
+  </main>
+    <footer>
+    <div class="wrap foot-inner">
+      <span>© Igor Almeida</span>
+      <nav aria-label="Profiles"><a class="" href="https://github.com/Almeida96">GitHub <span aria-hidden="true" class="arrow">↗</span></a><a class="" href="https://www.linkedin.com/in/igors-almeida/">LinkedIn <span aria-hidden="true" class="arrow">↗</span></a></nav>
+    </div>
+  </footer>
+  </body>
+</html>

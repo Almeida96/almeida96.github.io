@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f0">
+    <title>PatchMeter — Igor Almeida</title>
+    <meta name="description" content="Cruzo as linhas novas de um diff com a cobertura de testes para mostrar exatamente o que ficou sem execução.">
+    <link rel="canonical" href="https://almeida96.github.io/pt/projetos/patchmeter/">
+    <link rel="alternate" hreflang="en" href="https://almeida96.github.io/projects/patchmeter/">
+    <link rel="alternate" hreflang="pt-BR" href="https://almeida96.github.io/pt/projetos/patchmeter/">
+    <link rel="alternate" hreflang="x-default" href="https://almeida96.github.io/projects/patchmeter/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PatchMeter — Igor Almeida">
+    <meta property="og:description" content="Cruzo as linhas novas de um diff com a cobertura de testes para mostrar exatamente o que ficou sem execução.">
+    <meta property="og:image" content="https://almeida96.github.io/assets/igor-profile.jpg">
+    <meta property="og:url" content="https://almeida96.github.io/pt/projetos/patchmeter/">
+    <link rel="icon" href="/favicon.png">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/nav.js" defer></script>
+  </head>
+  <body>
+
+    <a class="skip" href="#main">Pular para o conteúdo</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="identity" href="/pt/" aria-label="Igor Almeida">
+          <span class="monogram" aria-hidden="true">ia<span>.</span></span><span>Igor Almeida</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Menu"><a href="/pt/#projetos">Projetos</a>
+<a href="/pt/#aplicativos">Aplicativos</a>
+<a href="/pt/#sobre">Sobre</a>
+<a href="/pt/#contato">Contato</a></nav>
+        <div class="header-end">
+          <nav class="languages" aria-label="Idioma"><a lang="en" hreflang="en" href="/projects/patchmeter/">EN</a><i aria-hidden="true">/</i><a lang="pt-BR" hreflang="pt-BR" aria-current="page" href="/pt/projetos/patchmeter/">PT</a></nav>
+          <details class="mobile-menu">
+            <summary>Menu <span aria-hidden="true">☰</span></summary>
+            <nav aria-label="Menu"><a href="/pt/#projetos">Projetos</a>
+<a href="/pt/#aplicativos">Aplicativos</a>
+<a href="/pt/#sobre">Sobre</a>
+<a href="/pt/#contato">Contato</a></nav>
+          </details>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+    <div class="wrap case-top">
+      <a class="back" href="/pt/#projetos"><span aria-hidden="true" class="arrow">←</span> Voltar aos projetos</a>
+      <div class="case-heading">
+        <div>
+          <p class="hero-overline"><span class="orange-rule"></span>Estudo de caso / Qualidade de código</p>
+          <h1>PatchMeter<span>.</span></h1>
+          <p class="case-lead">Cruzo as linhas novas de um diff com a cobertura de testes para mostrar exatamente o que ficou sem execução.</p>
+          <div class="case-actions">
+            <a class="button" href="https://github.com/Almeida96/PatchMeter">Código no GitHub <span aria-hidden="true" class="arrow">↗</span></a>
+            <a class="text-link" href="https://github.com/Almeida96/PatchMeter/releases/tag/v0.1.0">Baixar release <span aria-hidden="true" class="arrow">↗</span></a>
+          </div>
+        </div>
+        <div class="case-visual"><div class="visual patch-art" aria-hidden="true">
+      <div class="visual-top"><span>Cobertura no diff</span><b>diff</b></div>
+      <div class="patch-lines"><div class="yes"><span>5</span><i>+</i><em></em><b>Coberta</b></div>
+<div class="yes"><span>6</span><i>+</i><em></em><b>Coberta</b></div>
+<div class="no"><span>7</span><i>+</i><em></em><b>Sem cobertura</b></div>
+<div class="na"><span>8</span><i>+</i><em></em><b>Sem registro</b></div></div>
+    </div><p>Exemplo do projeto</p></div>
+      </div>
+    </div>
+    <div class="case-detail">
+      <div class="wrap detail-grid">
+        <aside class="tech"><h2>Tecnologias</h2><span>Java 21</span><span>JaCoCo</span><span>LCOV</span><span>MCP</span></aside>
+        <div class="case-prose"><section>
+    <h2>O problema</h2>
+    <p>Uma alteração pequena pode introduzir uma regra de negócio sem teste e mal mexer na porcentagem de cobertura do projeto. Durante a revisão, quero saber qual linha mudou e o que o relatório de testes registrou sobre ela.</p>
+
+  </section>
+<section>
+    <h2>Como funciona</h2>
+    <p>O PatchMeter cruza o caminho e o número de cada linha adicionada no Git com registros do JaCoCo ou LCOV. O relatório diferencia execução, zero execuções e ausência de dados. Três consultas MCP permitem examinar o resultado por arquivo e linha.</p>
+
+  </section>
+<section>
+    <h2>O que o exemplo mostra</h2>
+    <p>O exemplo sintético adiciona um desconto por quantidade. Das quatro linhas Java novas, duas foram executadas, a linha 7 do desconto teve zero execuções e a linha 8 ficou sem registro. A cobertura observada de 66,6667% fica abaixo do limite de 80%.</p>
+    <div class="table-wrap">
+    <table class="evidence-table">
+      <caption>Pricing.java no exemplo sintético</caption>
+      <thead><tr><th scope="col">Linha</th><th scope="col">Observação</th><th scope="col">Ramificações não executadas</th></tr></thead>
+      <tbody><tr>
+    <th scope="row">5</th>
+    <td>Executada</td><td>1</td>
+  </tr>
+<tr>
+    <th scope="row">6</th>
+    <td>Executada</td><td>0</td>
+  </tr>
+<tr>
+    <th scope="row">7</th>
+    <td>Sem execução</td><td>2</td>
+  </tr>
+<tr>
+    <th scope="row">8</th>
+    <td>Sem registro</td><td>—</td>
+  </tr></tbody>
+    </table>
+  </div>
+  </section>
+<section>
+    <h2>Limites da análise</h2>
+    <p>O diff e o relatório precisam vir da mesma revisão do código. A porcentagem considera as linhas com registro explícito. Avaliar se as asserções verificam o desconto continua sendo parte da revisão.</p>
+
+  </section><section>
+    <h2>Executar o exemplo</h2>
+
+    <pre><code>bin/patchmeter demo --dir demo-output</code></pre>
+
+  </section></div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <span class="eyebrow">Próximo projeto</span>
+      <a class="" href="/pt/projetos/tooltape/">ToolTape <span aria-hidden="true" class="arrow">→</span></a>
+    </div>
+  </main>
+    <footer>
+    <div class="wrap foot-inner">
+      <span>© Igor Almeida</span>
+      <nav aria-label="Perfis"><a class="" href="https://github.com/Almeida96">GitHub <span aria-hidden="true" class="arrow">↗</span></a><a class="" href="https://www.linkedin.com/in/igors-almeida/">LinkedIn <span aria-hidden="true" class="arrow">↗</span></a></nav>
+    </div>
+  </footer>
+  </body>
+</html>

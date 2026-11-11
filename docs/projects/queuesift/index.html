@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f0">
+    <title>QueueSift — Igor Almeida</title>
+    <meta name="description" content="I built QueueSift to answer a question that comes up after a queue consumer recovers. Which failed deliveries can we consider sending again?">
+    <link rel="canonical" href="https://almeida96.github.io/projects/queuesift/">
+    <link rel="alternate" hreflang="en" href="https://almeida96.github.io/projects/queuesift/">
+    <link rel="alternate" hreflang="pt-BR" href="https://almeida96.github.io/pt/projetos/queuesift/">
+    <link rel="alternate" hreflang="x-default" href="https://almeida96.github.io/projects/queuesift/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="QueueSift — Igor Almeida">
+    <meta property="og:description" content="I built QueueSift to answer a question that comes up after a queue consumer recovers. Which failed deliveries can we consider sending again?">
+    <meta property="og:image" content="https://almeida96.github.io/assets/igor-profile.jpg">
+    <meta property="og:url" content="https://almeida96.github.io/projects/queuesift/">
+    <link rel="icon" href="/favicon.png">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/nav.js" defer></script>
+  </head>
+  <body>
+
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="identity" href="/" aria-label="Igor Almeida">
+          <span class="monogram" aria-hidden="true">ia<span>.</span></span><span>Igor Almeida</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Menu"><a href="/#projects">Projects</a>
+<a href="/#apps">Apps</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a></nav>
+        <div class="header-end">
+          <nav class="languages" aria-label="Language"><a lang="en" hreflang="en" aria-current="page" href="/projects/queuesift/">EN</a><i aria-hidden="true">/</i><a lang="pt-BR" hreflang="pt-BR" href="/pt/projetos/queuesift/">PT</a></nav>
+          <details class="mobile-menu">
+            <summary>Menu <span aria-hidden="true">☰</span></summary>
+            <nav aria-label="Menu"><a href="/#projects">Projects</a>
+<a href="/#apps">Apps</a>
+<a href="/#about">About</a>
+<a href="/#contact">Contact</a></nav>
+          </details>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+    <div class="wrap case-top">
+      <a class="back" href="/#projects"><span aria-hidden="true" class="arrow">←</span> Back to projects</a>
+      <div class="case-heading">
+        <div>
+          <p class="hero-overline"><span class="orange-rule"></span>Case study / Queue recovery</p>
+          <h1>QueueSift<span>.</span></h1>
+          <p class="case-lead">I built QueueSift to answer a question that comes up after a queue consumer recovers. Which failed deliveries can we consider sending again?</p>
+          <div class="case-actions">
+            <a class="button" href="https://github.com/Almeida96/queuesift">Source on GitHub <span aria-hidden="true" class="arrow">↗</span></a>
+            <a class="text-link" href="https://github.com/Almeida96/queuesift/releases/tag/v0.1.0">Download release <span aria-hidden="true" class="arrow">↗</span></a>
+          </div>
+        </div>
+        <div class="case-visual"><div class="visual queue-art" aria-hidden="true">
+      <div class="visual-top"><span>Replay review</span><b>orders.dead</b></div>
+      <div class="queue-distribution"><i data-outcome="candidate" style="flex:3"></i><i data-outcome="hold" style="flex:11"></i><i data-outcome="exclude" style="flex:2"></i></div>
+      <div class="queue-legend"><span data-outcome="candidate"><strong>3</strong> Candidates</span><span data-outcome="hold"><strong>11</strong> Held</span><span data-outcome="exclude"><strong>2</strong> Excluded</span></div>
+      <div class="visual-foot"><span>Project example</span><b>16 deliveries</b></div>
+    </div><p>Project example</p></div>
+      </div>
+    </div>
+    <div class="case-detail">
+      <div class="wrap detail-grid">
+        <aside class="tech"><h2>Technology</h2><span>Kotlin</span><span>Java 21</span><span>SQLite</span><span>MCP</span></aside>
+        <div class="case-prose"><section>
+    <h2>The problem</h2>
+    <p>A timeout can land an order in a dead-letter queue after its reservation has already succeeded. Replaying every delivery could reserve stock twice. An operator needs the original event, the consumer’s processing receipts and a way to spot conflicting copies.</p>
+
+  </section>
+<section>
+    <h2>How it works</h2>
+    <p>QueueSift imports a queue export and processing receipts into a local SQLite ledger. A policy describes the consumer’s idempotency and the failures an operator has marked as resolved. The CLI proposes batches for review. An agent can use read-only MCP tools to trace a decision back to a policy rule and the exact input lines.</p>
+
+  </section>
+<section>
+    <h2>Inside the example</h2>
+    <p>The synthetic fulfillment demo evaluates the same 16 deliveries twice. While the dependency timeout is unresolved, none qualify for review. Once the policy marks it resolved, the report proposes two batches. The first contains m01 and m13. Both have event ID evt-1, but they belong to different tenants. The second contains m14.</p>
+
+  </section>
+<section>
+    <h2>Limits of the analysis</h2>
+    <p>The demo has partial receipt coverage, so a missing receipt leaves the processing outcome unknown. Before sending anything, an operator still has to check the live consumer state and confirm how it handles duplicates. QueueSift stops at the review manifest.</p>
+
+  </section><section class="queue-example">
+    <h2>Three decisions from the orders queue</h2>
+    <p>Open a delivery to see why it received that decision and inspect the original evidence.</p>
+    <dl class="queue-counts"><div><dt>Deliveries</dt><dd>16</dd></div><div><dt>Candidates</dt><dd>3</dd></div><div><dt>Held</dt><dd>11</dd></div><div><dt>Excluded</dt><dd>2</dd></div></dl>
+    <div class="queue-records"><details class="queue-record">
+    <summary><code>m01</code> <span class="queue-outcome" data-outcome="candidate">CANDIDATE</span></summary>
+    <p>The timeout is marked resolved and the checks pass. This delivery represents two copies of the same event for the north tenant. Only m01 enters the review batch.</p><a class="text-link" href="https://github.com/Almeida96/queuesift/blob/v0.1.0/examples/fulfillment/messages.jsonl#L1-L2">Message export, lines 1–2 · m01 and m02 <span aria-hidden="true" class="arrow">↗</span></a>
+  </details>
+<details class="queue-record">
+    <summary><code>m04</code> <span class="queue-outcome" data-outcome="hold">HOLD</span></summary>
+    <p>Two copies of event evt-3 for the north tenant identify the same order. One reserves two units and the other reserves four. Both deliveries are held for reconciliation.</p><a class="text-link" href="https://github.com/Almeida96/queuesift/blob/v0.1.0/examples/fulfillment/messages.jsonl#L4-L5">Message export, lines 4–5 · order-102 <span aria-hidden="true" class="arrow">↗</span></a>
+  </details>
+<details class="queue-record">
+    <summary><code>m03</code> <span class="queue-outcome" data-outcome="exclude">EXCLUDE</span></summary>
+    <p>The consumer recorded processing evt-2 at 11:30 UTC. The receipt matches the event’s tenant and content hash, so this delivery is excluded from the proposed batches.</p><a class="text-link" href="https://github.com/Almeida96/queuesift/blob/v0.1.0/examples/fulfillment/receipts.jsonl#L1">Processing receipts, line 1 · north / evt-2 <span aria-hidden="true" class="arrow">↗</span></a>
+  </details></div>
+    <a class="text-link" href="https://github.com/Almeida96/queuesift/releases/download/v0.1.0/fulfillment-review.html">Download the sample HTML report <span aria-hidden="true" class="arrow">↗</span></a>
+  </section><figure>
+    <a href="/assets/evidence/recovery-review.jpg">
+      <img width="1060" loading="lazy" src="/assets/evidence/recovery-review.jpg" alt="QueueSift’s synthetic fulfillment report showing three replay candidates, eleven deliveries on hold and two excluded.">
+    </a>
+    <figcaption>Report generated from the project’s example data.</figcaption>
+  </figure><section>
+    <h2>Run the example</h2>
+    <p>With Java 21 installed, extract the release ZIP and run this command from the extracted folder. Open fulfillment-review/recovery/report.html to inspect the result.</p>
+    <pre><code>bin/queuesift demo --out fulfillment-review</code></pre>
+    <p>On Windows, use .\bin\queuesift.bat in place of bin/queuesift.</p>
+  </section></div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <span class="eyebrow">Next project</span>
+      <a class="" href="/projects/spandelta/">SpanDelta <span aria-hidden="true" class="arrow">→</span></a>
+    </div>
+  </main>
+    <footer>
+    <div class="wrap foot-inner">
+      <span>© Igor Almeida</span>
+      <nav aria-label="Profiles"><a class="" href="https://github.com/Almeida96">GitHub <span aria-hidden="true" class="arrow">↗</span></a><a class="" href="https://www.linkedin.com/in/igors-almeida/">LinkedIn <span aria-hidden="true" class="arrow">↗</span></a></nav>
+    </div>
+  </footer>
+  </body>
+</html>

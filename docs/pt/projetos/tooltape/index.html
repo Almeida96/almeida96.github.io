@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f0">
+    <title>ToolTape — Igor Almeida</title>
+    <meta name="description" content="Gravo as chamadas de ferramentas de um agente para reproduzir as respostas e revisar mudanças em um servidor MCP.">
+    <link rel="canonical" href="https://almeida96.github.io/pt/projetos/tooltape/">
+    <link rel="alternate" hreflang="en" href="https://almeida96.github.io/projects/tooltape/">
+    <link rel="alternate" hreflang="pt-BR" href="https://almeida96.github.io/pt/projetos/tooltape/">
+    <link rel="alternate" hreflang="x-default" href="https://almeida96.github.io/projects/tooltape/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ToolTape — Igor Almeida">
+    <meta property="og:description" content="Gravo as chamadas de ferramentas de um agente para reproduzir as respostas e revisar mudanças em um servidor MCP.">
+    <meta property="og:image" content="https://almeida96.github.io/assets/igor-profile.jpg">
+    <meta property="og:url" content="https://almeida96.github.io/pt/projetos/tooltape/">
+    <link rel="icon" href="/favicon.png">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/nav.js" defer></script>
+  </head>
+  <body>
+
+    <a class="skip" href="#main">Pular para o conteúdo</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="identity" href="/pt/" aria-label="Igor Almeida">
+          <span class="monogram" aria-hidden="true">ia<span>.</span></span><span>Igor Almeida</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Menu"><a href="/pt/#projetos">Projetos</a>
+<a href="/pt/#aplicativos">Aplicativos</a>
+<a href="/pt/#sobre">Sobre</a>
+<a href="/pt/#contato">Contato</a></nav>
+        <div class="header-end">
+          <nav class="languages" aria-label="Idioma"><a lang="en" hreflang="en" href="/projects/tooltape/">EN</a><i aria-hidden="true">/</i><a lang="pt-BR" hreflang="pt-BR" aria-current="page" href="/pt/projetos/tooltape/">PT</a></nav>
+          <details class="mobile-menu">
+            <summary>Menu <span aria-hidden="true">☰</span></summary>
+            <nav aria-label="Menu"><a href="/pt/#projetos">Projetos</a>
+<a href="/pt/#aplicativos">Aplicativos</a>
+<a href="/pt/#sobre">Sobre</a>
+<a href="/pt/#contato">Contato</a></nav>
+          </details>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+    <div class="wrap case-top">
+      <a class="back" href="/pt/#projetos"><span aria-hidden="true" class="arrow">←</span> Voltar aos projetos</a>
+      <div class="case-heading">
+        <div>
+          <p class="hero-overline"><span class="orange-rule"></span>Estudo de caso / Ferramentas para agentes</p>
+          <h1>ToolTape<span>.</span></h1>
+          <p class="case-lead">Gravo as chamadas de ferramentas de um agente para reproduzir as respostas e revisar mudanças em um servidor MCP.</p>
+          <div class="case-actions">
+            <a class="button" href="https://github.com/Almeida96/tooltape">Código no GitHub <span aria-hidden="true" class="arrow">↗</span></a>
+            <a class="text-link" href="https://github.com/Almeida96/tooltape/releases/tag/v0.1.0">Baixar release <span aria-hidden="true" class="arrow">↗</span></a>
+          </div>
+        </div>
+        <div class="case-visual"><div class="visual tape-art" aria-hidden="true">
+    <div class="visual-top"><span>Comparação de sessões</span><b>MCP</b></div>
+    <div class="tape-field">ticket.priority</div>
+    <div class="tape-values"><b>P2</b><span>→</span><b>P1</b></div>
+    <div class="visual-foot"><span>INC-1042</span><b>tools/call</b></div>
+  </div><p>Exemplo do projeto</p></div>
+      </div>
+    </div>
+    <div class="case-detail">
+      <div class="wrap detail-grid">
+        <aside class="tech"><h2>Tecnologias</h2><span>Java 21</span><span>MCP</span><span>JSON-RPC</span></aside>
+        <div class="case-prose"><section>
+    <h2>O problema</h2>
+    <p>Um teste de agente pode falhar porque o serviço devolveu dados diferentes entre duas execuções. Para reproduzir a falha, preciso dos argumentos, das respostas e da ordem das chamadas que o agente fez.</p>
+
+  </section>
+<section>
+    <h2>Como funciona</h2>
+    <p>O ToolTape registra uma sequência de chamadas MCP e preserva os resultados e erros em um arquivo JSON. Um servidor local reproduz a sessão gravada. Ao comparar duas gravações, o relatório mostra o caminho de cada campo alterado.</p>
+
+  </section>
+<section>
+    <h2>O que o exemplo mostra</h2>
+    <p>Na demonstração com chamados de suporte fictícios, duas gravações das mesmas três chamadas produzem seis diferenças. No chamado INC-1042, a prioridade muda de P2 para P1 e o status passa de investigating para resolved. O relatório permite localizar os dois valores nas gravações originais.</p>
+
+  </section>
+<section>
+    <h2>Limites da análise</h2>
+    <p>A reprodução segue a ordem e os argumentos gravados. Um agente que escolha outra ferramenta ou outra sequência precisa de um cenário próprio.</p>
+
+  </section><figure>
+    <a href="/assets/evidence/tooltape-comparison.jpg">
+      <img width="1060" loading="lazy" src="/assets/evidence/tooltape-comparison.jpg" alt="Relatório do ToolTape com duas ferramentas, três chamadas gravadas e seis diferenças encontradas entre as sessões.">
+    </a>
+    <figcaption>Relatório gerado com os dados de exemplo do projeto.</figcaption>
+  </figure><section>
+    <h2>Executar o exemplo</h2>
+
+    <pre><code>bin/tooltape demo --dir demo-output</code></pre>
+
+  </section></div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <span class="eyebrow">Próximo projeto</span>
+      <a class="" href="/pt/projetos/queuesift/">QueueSift <span aria-hidden="true" class="arrow">→</span></a>
+    </div>
+  </main>
+    <footer>
+    <div class="wrap foot-inner">
+      <span>© Igor Almeida</span>
+      <nav aria-label="Perfis"><a class="" href="https://github.com/Almeida96">GitHub <span aria-hidden="true" class="arrow">↗</span></a><a class="" href="https://www.linkedin.com/in/igors-almeida/">LinkedIn <span aria-hidden="true" class="arrow">↗</span></a></nav>
+    </div>
+  </footer>
+  </body>
+</html>

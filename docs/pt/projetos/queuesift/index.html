@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f0">
+    <title>QueueSift — Igor Almeida</title>
+    <meta name="description" content="Criei o QueueSift para responder a uma pergunta que surge depois que o consumidor de uma fila volta a funcionar. Quais entregas com falha podemos considerar para reenvio?">
+    <link rel="canonical" href="https://almeida96.github.io/pt/projetos/queuesift/">
+    <link rel="alternate" hreflang="en" href="https://almeida96.github.io/projects/queuesift/">
+    <link rel="alternate" hreflang="pt-BR" href="https://almeida96.github.io/pt/projetos/queuesift/">
+    <link rel="alternate" hreflang="x-default" href="https://almeida96.github.io/projects/queuesift/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="QueueSift — Igor Almeida">
+    <meta property="og:description" content="Criei o QueueSift para responder a uma pergunta que surge depois que o consumidor de uma fila volta a funcionar. Quais entregas com falha podemos considerar para reenvio?">
+    <meta property="og:image" content="https://almeida96.github.io/assets/igor-profile.jpg">
+    <meta property="og:url" content="https://almeida96.github.io/pt/projetos/queuesift/">
+    <link rel="icon" href="/favicon.png">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/nav.js" defer></script>
+  </head>
+  <body>
+
+    <a class="skip" href="#main">Pular para o conteúdo</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="identity" href="/pt/" aria-label="Igor Almeida">
+          <span class="monogram" aria-hidden="true">ia<span>.</span></span><span>Igor Almeida</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Menu"><a href="/pt/#projetos">Projetos</a>
+<a href="/pt/#aplicativos">Aplicativos</a>
+<a href="/pt/#sobre">Sobre</a>
+<a href="/pt/#contato">Contato</a></nav>
+        <div class="header-end">
+          <nav class="languages" aria-label="Idioma"><a lang="en" hreflang="en" href="/projects/queuesift/">EN</a><i aria-hidden="true">/</i><a lang="pt-BR" hreflang="pt-BR" aria-current="page" href="/pt/projetos/queuesift/">PT</a></nav>
+          <details class="mobile-menu">
+            <summary>Menu <span aria-hidden="true">☰</span></summary>
+            <nav aria-label="Menu"><a href="/pt/#projetos">Projetos</a>
+<a href="/pt/#aplicativos">Aplicativos</a>
+<a href="/pt/#sobre">Sobre</a>
+<a href="/pt/#contato">Contato</a></nav>
+          </details>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+    <div class="wrap case-top">
+      <a class="back" href="/pt/#projetos"><span aria-hidden="true" class="arrow">←</span> Voltar aos projetos</a>
+      <div class="case-heading">
+        <div>
+          <p class="hero-overline"><span class="orange-rule"></span>Estudo de caso / Recuperação de filas</p>
+          <h1>QueueSift<span>.</span></h1>
+          <p class="case-lead">Criei o QueueSift para responder a uma pergunta que surge depois que o consumidor de uma fila volta a funcionar. Quais entregas com falha podemos considerar para reenvio?</p>
+          <div class="case-actions">
+            <a class="button" href="https://github.com/Almeida96/queuesift">Código no GitHub <span aria-hidden="true" class="arrow">↗</span></a>
+            <a class="text-link" href="https://github.com/Almeida96/queuesift/releases/tag/v0.1.0">Baixar release <span aria-hidden="true" class="arrow">↗</span></a>
+          </div>
+        </div>
+        <div class="case-visual"><div class="visual queue-art" aria-hidden="true">
+      <div class="visual-top"><span>Revisão de reenvio</span><b>orders.dead</b></div>
+      <div class="queue-distribution"><i data-outcome="candidate" style="flex:3"></i><i data-outcome="hold" style="flex:11"></i><i data-outcome="exclude" style="flex:2"></i></div>
+      <div class="queue-legend"><span data-outcome="candidate"><strong>3</strong> Candidatas</span><span data-outcome="hold"><strong>11</strong> Retidas</span><span data-outcome="exclude"><strong>2</strong> Excluídas</span></div>
+      <div class="visual-foot"><span>Exemplo do projeto</span><b>16 entregas</b></div>
+    </div><p>Exemplo do projeto</p></div>
+      </div>
+    </div>
+    <div class="case-detail">
+      <div class="wrap detail-grid">
+        <aside class="tech"><h2>Tecnologias</h2><span>Kotlin</span><span>Java 21</span><span>SQLite</span><span>MCP</span></aside>
+        <div class="case-prose"><section>
+    <h2>O problema</h2>
+    <p>Um timeout pode levar um pedido à fila de mensagens mortas depois que a reserva de estoque já foi concluída. Reenviar todas as entregas poderia reservar estoque duas vezes. O operador precisa consultar o evento original, os comprovantes de processamento e as cópias que divergem.</p>
+
+  </section>
+<section>
+    <h2>Como funciona</h2>
+    <p>O QueueSift importa as mensagens e os comprovantes de processamento para uma base SQLite local. Uma política descreve a idempotência do consumidor e quais falhas o operador considera resolvidas. A CLI propõe lotes para revisão. Por MCP, um agente pode consultar a regra e as linhas de origem de cada decisão.</p>
+
+  </section>
+<section>
+    <h2>O que o exemplo mostra</h2>
+    <p>O exemplo de expedição avalia as mesmas 16 entregas sintéticas duas vezes. Enquanto o timeout da dependência está em aberto, nenhuma se qualifica para revisão. Quando a política registra sua resolução, o relatório propõe dois lotes. O primeiro contém m01 e m13. Ambos têm o identificador evt-1, mas pertencem a tenants diferentes. O segundo contém m14.</p>
+
+  </section>
+<section>
+    <h2>Limites da análise</h2>
+    <p>O exemplo tem cobertura parcial dos comprovantes. Quando falta um registro, o resultado do processamento continua desconhecido. Antes de qualquer reenvio, o operador precisa conferir o estado atual do consumidor e como ele trata duplicatas. O QueueSift encerra o processo ao gerar a lista para revisão.</p>
+
+  </section><section class="queue-example">
+    <h2>Três decisões da fila de pedidos</h2>
+    <p>Abra uma entrega para conferir o motivo da decisão e a evidência no arquivo de origem.</p>
+    <dl class="queue-counts"><div><dt>Entregas</dt><dd>16</dd></div><div><dt>Candidatas</dt><dd>3</dd></div><div><dt>Retidas</dt><dd>11</dd></div><div><dt>Excluídas</dt><dd>2</dd></div></dl>
+    <div class="queue-records"><details class="queue-record">
+    <summary><code>m01</code> <span class="queue-outcome" data-outcome="candidate">CANDIDATE</span></summary>
+    <p>A política registra a resolução do timeout e as verificações passaram. Esta entrega representa duas cópias do mesmo evento do tenant north. Só m01 entra no lote para revisão.</p><a class="text-link" href="https://github.com/Almeida96/queuesift/blob/v0.1.0/examples/fulfillment/messages.jsonl#L1-L2">Mensagens, linhas 1–2 · m01 e m02 <span aria-hidden="true" class="arrow">↗</span></a>
+  </details>
+<details class="queue-record">
+    <summary><code>m04</code> <span class="queue-outcome" data-outcome="hold">HOLD</span></summary>
+    <p>Duas cópias do evento evt-3 do tenant north identificam o mesmo pedido. Uma reserva duas unidades e a outra reserva quatro. As duas entregas ficam retidas até a divergência ser esclarecida.</p><a class="text-link" href="https://github.com/Almeida96/queuesift/blob/v0.1.0/examples/fulfillment/messages.jsonl#L4-L5">Mensagens, linhas 4–5 · order-102 <span aria-hidden="true" class="arrow">↗</span></a>
+  </details>
+<details class="queue-record">
+    <summary><code>m03</code> <span class="queue-outcome" data-outcome="exclude">EXCLUDE</span></summary>
+    <p>O consumidor registrou o processamento de evt-2 às 11h30 UTC. O tenant e o hash do conteúdo coincidem com os do comprovante, por isso a entrega fica fora dos lotes propostos.</p><a class="text-link" href="https://github.com/Almeida96/queuesift/blob/v0.1.0/examples/fulfillment/receipts.jsonl#L1">Comprovantes de processamento, linha 1 · north / evt-2 <span aria-hidden="true" class="arrow">↗</span></a>
+  </details></div>
+    <a class="text-link" href="https://github.com/Almeida96/queuesift/releases/download/v0.1.0/fulfillment-review.html">Baixar o relatório HTML do exemplo <span aria-hidden="true" class="arrow">↗</span></a>
+  </section><figure>
+    <a href="/assets/evidence/recovery-review.jpg">
+      <img width="1060" loading="lazy" src="/assets/evidence/recovery-review.jpg" alt="Relatório sintético do QueueSift com três entregas candidatas a reenvio, onze retidas e duas excluídas.">
+    </a>
+    <figcaption>Relatório gerado com os dados de exemplo do projeto.</figcaption>
+  </figure><section>
+    <h2>Executar o exemplo</h2>
+    <p>Com Java 21, extraia o ZIP da release e execute este comando a partir da pasta extraída. Abra fulfillment-review/recovery/report.html para ver o resultado.</p>
+    <pre><code>bin/queuesift demo --out fulfillment-review</code></pre>
+    <p>No Windows, use .\bin\queuesift.bat no lugar de bin/queuesift.</p>
+  </section></div>
+      </div>
+    </div>
+    <div class="wrap next-case">
+      <span class="eyebrow">Próximo projeto</span>
+      <a class="" href="/pt/projetos/spandelta/">SpanDelta <span aria-hidden="true" class="arrow">→</span></a>
+    </div>
+  </main>
+    <footer>
+    <div class="wrap foot-inner">
+      <span>© Igor Almeida</span>
+      <nav aria-label="Perfis"><a class="" href="https://github.com/Almeida96">GitHub <span aria-hidden="true" class="arrow">↗</span></a><a class="" href="https://www.linkedin.com/in/igors-almeida/">LinkedIn <span aria-hidden="true" class="arrow">↗</span></a></nav>
+    </div>
+  </footer>
+  </body>
+</html>
