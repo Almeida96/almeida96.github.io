@@ -1,5 +1,6 @@
 export const appIndex = [
   {
+    slug: "wearloom",
     name: "Wearloom",
     en: {
       stage: "Android preview",
@@ -13,6 +14,7 @@ export const appIndex = [
     },
   },
   {
+    slug: "medapp",
     name: "MedApp",
     en: {
       stage: "Mobile prototype",
@@ -26,6 +28,7 @@ export const appIndex = [
     },
   },
   {
+    slug: "skillpath",
     name: "SkillPath",
     en: {
       stage: "Mobile prototype",
@@ -39,6 +42,7 @@ export const appIndex = [
     },
   },
   {
+    slug: "retoma",
     name: "Retoma",
     en: {
       stage: "Web app with a demo",
@@ -52,6 +56,7 @@ export const appIndex = [
     },
   },
   {
+    slug: "jiu-jitsu-academy",
     name: "Jiu-jitsu academy app",
     en: {
       name: "Jiu-jitsu academy app",
@@ -67,6 +72,7 @@ export const appIndex = [
     },
   },
   {
+    slug: "fisioapp",
     name: "FisioApp",
     en: {
       stage: "Earlier desktop version",
@@ -80,6 +86,7 @@ export const appIndex = [
     },
   },
   {
+    slug: "extension-9",
     name: "Extension 9",
     en: {
       stage: "Playable Windows prototype",
@@ -93,6 +100,7 @@ export const appIndex = [
     },
   },
   {
+    slug: "co-op-exploration",
     name: "Co-op exploration game",
     en: {
       name: "Co-op exploration game",

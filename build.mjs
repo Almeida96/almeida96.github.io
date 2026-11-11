@@ -5,6 +5,8 @@ import { caseStudies as previousStudies } from './cases.mjs';
 import { queueExample, queueStudy } from './queue-case.mjs';
 import { projectIndex } from './project-index.mjs';
 import { appIndex } from './app-index.mjs';
+import { appStudies } from './app-studies.mjs';
+import { appMedia } from './app-media.mjs';
 
 const args = process.argv.slice(2);
 const dist = fileURLToPath(new URL(args.includes('--pages') ? './docs/' : './dist/', import.meta.url));
@@ -14,6 +16,7 @@ const github = 'https://github.com/Almeida96';
 const contribution = 'https://github.com/hashgraph-online/hol-guard/pull/7293';
 const caseStudies = { ...previousStudies, queuesift: queueStudy };
 const slugs = Object.keys(caseStudies);
+const apps = Object.fromEntries(appIndex.map(app => [app.slug, app]));
 const languages = ['en', 'pt'];
 
 const copy = {
@@ -99,6 +102,7 @@ function link(url, label, className = '', direction = 'up') {
 
 function pagePath(language, slug = '') {
   const t = copy[language];
+  if (apps[slug]) return language === 'pt' ? `/pt/aplicativos/${slug}/` : `/apps/${slug}/`;
   return slug ? `/${t.folder}/${slug}/` : t.home;
 }
 
@@ -144,10 +148,14 @@ function footer(t) {
 
 function shell(language, slug, body) {
   const t = copy[language];
-  const study = slug ? caseStudies[slug][language] : null;
+  const app = apps[slug];
+  const study = caseStudies[slug]?.[language];
   const role = language === 'pt' ? 'Engenheiro de software' : 'Software Engineer';
-  const title = escape(study ? `${study.title} — Igor Almeida` : `Igor Almeida — ${role}`);
-  const summary = escape(study?.lead ?? t.metadesc);
+  const pageTitle = app ? app[language].name ?? app.name : study?.title;
+  const title = escape(pageTitle ? `${pageTitle} — Igor Almeida` : `Igor Almeida — ${role}`);
+  const summary = escape(app?.[language].description ?? study?.lead ?? t.metadesc);
+  const shareImage = appMedia[slug]?.[0]?.file;
+  const imagePath = shareImage ? `/assets/apps/${shareImage}` : '/assets/igor-profile.jpg';
   const url = escape(origin + pagePath(language, slug));
   const alternates = languages.map(key =>
     `<link rel="alternate" hreflang="${copy[key].lang}" href="${escape(origin + pagePath(key, slug))}">`
@@ -166,12 +174,12 @@ function shell(language, slug, body) {
     <meta property="og:type" content="website">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${summary}">
-    <meta property="og:image" content="${escape(origin)}/assets/igor-profile.jpg">
+    <meta property="og:image" content="${escape(origin + imagePath)}">
     <meta property="og:url" content="${url}">
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
     <link rel="stylesheet" href="/assets/site.css">
-    <script src="/assets/nav.js" defer></script>
+    <script src="/assets/nav.js" defer></script>${app ? '\n    <script src="/assets/gallery.js" defer></script>' : ''}
   </head>
   <body>
     ${header(language, slug)}
@@ -286,15 +294,57 @@ function projectDirectory(language) {
   </section>`;
 }
 
+function pairedPortraits(photos) {
+  return photos.length > 1 && photos.every(photo => photo.height > photo.width);
+}
+
+function renderAppVisual(slug, language, view) {
+  const photos = appMedia[slug];
+  const primary = pairedPortraits(photos) ? photos : photos.slice(0, 1);
+  const selected = view === 'secondary' ? photos.slice(primary.length) : primary;
+  const format = selected[0].height > selected[0].width ? 'portrait' : 'landscape';
+  const expand = language === 'en' ? 'Enlarge image' : 'Ampliar imagem';
+  const items = selected.map((photo, index) => {
+    const source = '/assets/apps/' + photo.file;
+    const thumbnail = '/assets/apps/' + photo.file.replace(/\.[^.]+$/, '-thumb.webp');
+    if (view === 'card') {
+      return `<img src="${escape(thumbnail)}" width="${photo.width}" height="${photo.height}" alt="" loading="lazy" decoding="async">`;
+    }
+    const caption = escape(photo[language]);
+    return `<figure class="product-shot">
+      <a href="${escape(source)}" class="expand-shot" aria-label="${expand} · ${caption}">
+        <img src="${escape(source)}" width="${photo.width}" height="${photo.height}" alt="${caption}" ${index ? 'loading="lazy"' : 'fetchpriority="high"'} decoding="async">
+        <span class="expand-mark" aria-hidden="true">⤢</span>
+      </a><figcaption>${caption}</figcaption>
+    </figure>`;
+  }).join('');
+  return `<div class="product-media media-${view} format-${format} ${selected.length > 1 ? 'multiple' : 'single'}">${items}</div>`;
+}
+
+function imageDialog(language) {
+  const label = language === 'en' ? 'Image viewer' : 'Visualizador de imagens';
+  const close = language === 'en' ? 'Close' : 'Fechar';
+  return `<dialog class="image-viewer" aria-label="${label}">
+    <div class="viewer-body"><form method="dialog"><button type="submit" autofocus>${close} ×</button></form>
+      <figure><img alt=""><figcaption></figcaption></figure>
+    </div>
+  </dialog>`;
+}
+
 function applications(language) {
   const t = copy[language];
   const cards = appIndex.map(app => {
     const entry = app[language];
-    return `<article class="app-entry">
-      <p class="app-stage">${escape(entry.stage)}</p>
-      <h3>${escape(entry.name ?? app.name)}</h3>
-      <p>${escape(entry.description)}</p>
-      ${entry.workflow ? `<p class="app-workflow">${escape(entry.workflow)}</p>` : ''}
+    const title = escape(entry.name ?? app.name);
+    return `<article class="app-entry" data-app="${app.slug}">
+      <a class="app-card-link" href="${pagePath(language, app.slug)}" aria-labelledby="name-${app.slug}">
+        ${renderAppVisual(app.slug, language, 'card')}
+        <div class="app-card-copy">
+          <p class="app-stage">${escape(entry.stage)}</p>
+          <h3 id="name-${app.slug}">${title} ${arrow('right')}</h3>
+          <p>${escape(entry.description)}</p>
+        </div>
+      </a>
     </article>`;
   }).join('\n');
   return `<section class="app-section" id="${t.anchors[1]}" aria-labelledby="apps-title">
@@ -447,15 +497,58 @@ function casePage(language, slug) {
   </main>`;
 }
 
+function appPage(language, app) {
+  const t = copy[language];
+  const entry = app[language];
+  const study = appStudies[app.slug][language];
+  const text = language === 'en'
+    ? {back:'All apps', usage:'A walkthrough', engineering:'Implementation', status:'Development status', next:'Next app'}
+    : {back:'Todos os aplicativos', usage:'Passo a passo', engineering:'Implementação', status:'Estágio de desenvolvimento', next:'Próximo aplicativo'};
+  const next = appIndex[(appIndex.indexOf(app) + 1) % appIndex.length];
+  const steps = study.steps.map(step => `<li>${escape(step)}</li>`).join('');
+  return `<main id="main" class="product-page" data-app="${app.slug}">
+    <div class="wrap case-top">
+      <a class="back" href="${t.home}#${t.anchors[1]}">${arrow('back')} ${text.back}</a>
+      <div class="product-heading">
+        <div class="product-intro">
+          <p class="hero-overline"><span class="orange-rule"></span>${escape(study.platform)}</p>
+          <h1>${escape(entry.name ?? app.name)}<span>.</span></h1>
+          <p class="case-lead">${escape(study.purpose)}</p>
+          <p class="product-stage">${escape(entry.stage)}</p>
+        </div>
+        ${renderAppVisual(app.slug, language, 'detail')}
+      </div>
+    </div>
+    <section class="product-notes"><div class="wrap product-columns">
+      <div><h2>${text.usage}</h2><ol class="product-steps">${steps}</ol></div>
+      <div class="product-tech">
+        <h2>${text.engineering}</h2><p>${escape(study.implementation)}</p>
+        <h2>${text.status}</h2><p>${escape(study.stageNote)}</p>
+      </div>
+    </div>
+      ${appMedia[app.slug].length > 1 && !pairedPortraits(appMedia[app.slug])
+        ? `<div class="wrap product-secondary">${renderAppVisual(app.slug, language, 'secondary')}</div>` : ''}
+    </section>
+    <div class="wrap next-case"><span class="eyebrow">${text.next}</span>
+      ${link(pagePath(language, next.slug), next[language].name ?? next.name, '', 'right')}
+    </div>
+    ${imageDialog(language)}
+  </main>`;
+}
+
 const urls = [];
 for (const language of languages) {
-  for (const slug of ['', ...slugs]) {
+  for (const slug of ['', ...slugs, ...Object.keys(apps)]) {
     const path = pagePath(language, slug);
-    const body = slug ? casePage(language, slug) : home(language);
+    let body;
+    if (apps[slug]) body = appPage(language, apps[slug]);
+    else body = slug ? casePage(language, slug) : home(language);
     const html = shell(language, slug, body).replace(/^[\t ]+$/gm, '');
     const paths = [path];
-    if (language === 'en') paths.push(slug ? `/en/projects/${slug}/` : '/en/');
-    if (language === 'pt' && slug) paths.push(`/projetos/${slug}/`);
+    if (!apps[slug]) {
+      if (language === 'en') paths.push(slug ? `/en/projects/${slug}/` : '/en/');
+      if (language === 'pt' && slug) paths.push(`/projetos/${slug}/`);
+    }
     for (const outputPath of paths) {
       const directory = join(dist, outputPath.slice(1));
       await mkdir(directory, { recursive: true });

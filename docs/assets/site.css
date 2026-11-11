@@ -15,6 +15,7 @@ img { max-width:100%; display:block }
 .wrap { width:min(100% - clamp(40px,9vw,152px),1264px); margin-inline:auto }
 .skip { position:fixed; left:15px; top:-100px; z-index:99; background:var(--ink); color:white; padding:10px 18px }
 .skip:focus { top:10px }
+.skip:not(:focus) { clip-path:inset(50%); width:1px; height:1px; overflow:hidden; padding:0 }
 .site-header { border-bottom:1px solid var(--line) }
 .header-inner { min-height:78px; display:flex; align-items:center; gap:clamp(24px,4vw,60px) }
 .identity { display:inline-flex; align-items:center; gap:12px; margin-right:auto; font-weight:750; font-size:19px; letter-spacing:-.05em }
@@ -261,3 +262,79 @@ footer { border-top:1px solid var(--line) }
   .app-section .section-head,.project-index .section-head { flex-wrap:wrap; align-items:start }
   .queue-counts dt { font-size:10px }
 }
+
+/* Application screenshots and case studies */
+[data-app] { --mat:#dbe4e1 }
+[data-app="wearloom"] { --mat:#e8dbd0 }
+[data-app="medapp"] { --mat:#d5e6e9 }
+[data-app="skillpath"] { --mat:#dadcd0 }
+[data-app="retoma"] { --mat:#d8e4de }
+[data-app="jiu-jitsu-academy"] { --mat:#dfdeda }
+[data-app="fisioapp"] { --mat:#d3ddd5 }
+[data-app="extension-9"] { --mat:#2c2928 }
+[data-app="co-op-exploration"] { --mat:#283a42 }
+.app-grid { column-gap:clamp(20px,3vw,44px); row-gap:34px }
+.app-entry { border:0; padding:0 }
+.app-card-link { display:block; height:100% }
+.app-card-link h3 { display:flex; align-items:baseline; justify-content:space-between; gap:12px }
+.app-card-link h3 .arrow { font-size:21px; color:var(--dark-orange) }
+.app-card-link:hover h3 { color:var(--dark-orange) }
+.app-card-copy { padding-top:16px }
+.app-card-copy p:last-child { max-width:56ch }
+.product-media img { display:block }
+.media-card { display:flex; align-items:flex-start; justify-content:center; gap:4.5%; aspect-ratio:2.1; background:var(--mat); overflow:hidden }
+.media-card img { transition:transform .24s }
+.app-card-link:hover .media-card img { transform:translateY(-3px) }
+.media-card.format-landscape { padding:5% 6% 0 }
+.media-card.format-landscape img { width:100%; height:auto; box-shadow:0 3px 15px #161f2228; border:1px solid #1b20151c }
+.media-card.format-portrait { padding:5% 8% 0 }
+.media-card.format-portrait img { width:38%; height:auto; border-radius:8px 8px 0 0; box-shadow:0 2px 12px #18202126 }
+.media-card.format-portrait img:nth-child(2) { margin-top:4% }
+.media-card.format-portrait.single img { width:52% }
+[data-app="jiu-jitsu-academy"] .media-card { padding:12px 0 }
+[data-app="jiu-jitsu-academy"] .media-card img { height:100%; width:auto; max-width:85%; object-fit:contain; border-radius:0 }
+[data-app="extension-9"] .media-card.format-landscape,
+[data-app="co-op-exploration"] .media-card.format-landscape { padding:0 }
+[data-app="extension-9"] .media-card img,[data-app="co-op-exploration"] .media-card img { width:100%; height:100%; object-fit:cover; object-position:center }
+.product-heading { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:clamp(30px,6vw,90px); align-items:center; padding:clamp(34px,5vw,76px) 0 }
+.product-intro h1 { margin:15px 0 19px; font:700 clamp(58px,6.5vw,96px)/.96 var(--display); letter-spacing:-.03em; overflow-wrap:anywhere }
+.product-intro h1 span { color:var(--orange) }
+.product-stage { display:inline-block; border-top:1px solid var(--line); margin-top:23px; padding-top:9px; color:var(--muted); font:500 12px/1.5 var(--mono) }
+.media-detail,.media-secondary { min-width:0 }
+.media-detail.format-portrait.multiple { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px }
+.expand-shot { display:grid; place-items:center; background:var(--mat); position:relative; cursor:zoom-in; padding:10px }
+.expand-shot img { max-width:100%; width:auto; height:auto; max-height:420px; object-fit:contain }
+.format-landscape .expand-shot img { width:100% }
+.expand-mark { position:absolute; right:6px; bottom:6px; background:#242a25; color:#fff; display:grid; place-items:center; min-width:26px; height:26px; border-radius:3px; font:600 19px/1 var(--sans) }
+.product-shot figcaption,.image-viewer figcaption { margin-top:9px; color:var(--muted); font:450 12px/1.5 var(--sans) }
+.product-notes { background:var(--white); border-block:1px solid var(--line) }
+.product-columns { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,8vw,105px); padding-block:clamp(33px,5vw,66px) }
+.product-columns h2 { font:650 clamp(30px,3vw,43px)/1.12 var(--display); margin-bottom:14px; letter-spacing:-.02em }
+.product-steps { padding-left:1.5rem; margin:0 }
+.product-steps li { padding:8px 0 8px 6px; border-top:1px solid var(--line) }
+.product-steps li::marker { font:500 12px var(--mono); color:var(--dark-orange) }
+.product-tech p,.product-steps li { line-height:1.65; color:#434c45 }
+.product-tech p+h2 { margin-top:24px }
+.product-secondary { padding-bottom:clamp(30px,4vw,64px) }
+.media-secondary { max-width:860px; margin:auto }
+.media-secondary .expand-shot img { max-height:540px }
+.image-viewer { width:fit-content; max-width:calc(100vw - 24px); max-height:94vh; padding:0; color:var(--ink); background:var(--paper); border:0; box-shadow:0 7px 44px #0005 }
+.image-viewer::backdrop { background:rgba(17,24,20,.88) }
+.viewer-body { padding:12px 16px 14px }
+.viewer-body form { display:flex; justify-content:flex-end; margin-bottom:8px }
+.viewer-body button { appearance:none; background:var(--ink); color:#fff; border:0; padding:7px 13px; font:600 14px var(--sans); cursor:pointer }
+.viewer-body button:focus-visible { outline:3px solid var(--orange); outline-offset:2px }
+.viewer-body img { margin:auto; max-width:calc(100vw - 60px); max-height:72vh; width:auto; height:auto }
+.image-viewer figcaption { max-width:88ch }
+.product-page .next-case>a { max-width:72%; text-align:right }
+@media (max-width:680px) {
+  .app-grid { row-gap:26px }
+  .product-heading,.product-columns { grid-template-columns:minmax(0,1fr) }
+  .product-heading { padding-block:26px 32px; gap:22px }
+  .product-intro h1 { font-size:clamp(47px,13vw,77px) }
+  .product-stage { margin-top:12px }
+  .product-columns { gap:24px }
+  .format-portrait.single .expand-shot img { max-height:350px }
+  .app-card-copy { padding-top:10px }
+}
+@media(prefers-reduced-motion:reduce) { .app-card-link:hover .media-card img { transform:none } }
