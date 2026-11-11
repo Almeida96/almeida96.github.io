@@ -25,6 +25,12 @@ async function concluir() {
       referrerPolicy: 'no-referrer', headers: { Accept: 'application/json' },
     });
     const result = await response.json();
+    if (response.ok && result.returnTo === 'https://almeida96.github.io/wearloom/beta/') {
+      voltar.href = '/wearloom/beta/';
+      voltar.hidden = false;
+      window.location.replace(voltar.href);
+      return;
+    }
     if (response.ok && result.status === 'ready') {
       titulo.textContent = 'Autorização recebida';
       mensagem.textContent = 'Volte ao aplicativo neste aparelho para abrir suas pastas.';
