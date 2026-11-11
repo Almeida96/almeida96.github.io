@@ -72,22 +72,6 @@ export const appMedia = {
       "pt": "Detalhe do diretório de academias com o campo de busca e o filtro de academias com professor ativado."
     }
   ],
-  "fisioapp": [
-    {
-      "file": "fisioapp.webp",
-      "width": 720,
-      "height": 500,
-      "en": "A fictional patient’s session history shows four visits recorded and six remaining in a ten-session package.",
-      "pt": "O histórico de um paciente fictício mostra quatro atendimentos registrados e seis sessões restantes em um pacote de dez."
-    },
-    {
-      "file": "fisioapp-dashboard.webp",
-      "width": 690,
-      "height": 520,
-      "en": "FisioApp’s desktop home shows one example patient, four recorded sessions and shortcuts to patient and session records.",
-      "pt": "A tela inicial do FisioApp mostra um paciente de exemplo, quatro sessões registradas e atalhos para cadastro e histórico."
-    }
-  ],
   "extension-9": [
     {
       "file": "extension-corridor.webp",

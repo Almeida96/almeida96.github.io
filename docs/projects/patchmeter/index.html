@@ -55,6 +55,7 @@
           <div class="case-actions">
             <a class="button" href="https://github.com/Almeida96/PatchMeter">Source on GitHub <span aria-hidden="true" class="arrow">↗</span></a>
             <a class="text-link" href="https://github.com/Almeida96/PatchMeter/releases/tag/v0.1.0">Download release <span aria-hidden="true" class="arrow">↗</span></a>
+            <a class="text-link" href="#engineering">Engineering details <span aria-hidden="true" class="arrow">↓</span></a>
           </div>
         </div>
         <div class="case-visual"><div class="visual patch-art" aria-hidden="true">
@@ -66,6 +67,25 @@
     </div><p>Project example</p></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Engineering details</h2>
+
+      <dl class="engineering-notes notes-3"><div>
+    <dt>Diff parsing in Java</dt>
+    <dd>The Java 21 parser tracks both the line in the updated file and its position in the Git diff. That lets a reviewer locate an uncovered change even after a rename.</dd>
+  </div>
+<div>
+    <dt>Reading coverage reports</dt>
+    <dd>A SAX parser reads JaCoCo XML, and a separate reader handles LCOV. An added line with zero hits counts as uncovered. If the report omits an entire selected file, the result is inconclusive.</dd>
+  </div>
+<div>
+    <dt>Regression tests</dt>
+    <dd>JUnit tests exercise real Git output containing spaces and Unicode in filenames, repeated LCOV records and partial branch coverage. MCP tests verify that paginated evidence preserves line order and avoids duplicates.</dd>
+  </div></dl>
+      <p class="engineering-files"><span>Source and tests</span> <a class="text-link" href="https://github.com/Almeida96/PatchMeter/blob/e462b6cc67f1ca70009598c702c7a87461d2e585/src/main/java/io/github/almeida96/patchmeter/Coverage.java">Coverage.java <span aria-hidden="true" class="arrow">↗</span></a> <a class="text-link" href="https://github.com/Almeida96/PatchMeter/blob/e462b6cc67f1ca70009598c702c7a87461d2e585/src/test/java/io/github/almeida96/patchmeter/CoverageTest.java">CoverageTest.java <span aria-hidden="true" class="arrow">↗</span></a></p>
+    </div>
+  </section>
     <div class="case-detail">
       <div class="wrap detail-grid">
         <aside class="tech"><h2>Technology</h2><span>Java 21</span><span>JaCoCo</span><span>LCOV</span><span>MCP</span></aside>

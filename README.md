@@ -2,7 +2,7 @@
 
 [Portfolio](https://almeida96.github.io/) · [Português](https://almeida96.github.io/pt/)
 
-Four engineering case studies cover trace regressions, changed-line test coverage, MCP replay and dead-letter queue recovery. Each study links to the project and a reproducible example. The [application gallery](https://almeida96.github.io/#apps) covers eight mobile, web, desktop and game projects. Each has screenshots, a walkthrough and notes on its implementation and current stage.
+Four engineering case studies cover trace regressions, changed-line test coverage, MCP replay and dead-letter queue recovery. Each study links to the project and a reproducible example. The [application gallery](https://almeida96.github.io/#apps) covers seven mobile, web and game projects. Each has screenshots, a walkthrough and notes on its implementation and current stage.
 
 ## Run locally
 
@@ -18,6 +18,8 @@ Open [the local portfolio](http://localhost:8000/). The build uses only Node's b
 ## Edit a project
 
 Edit `app-index.mjs` for the application cards and `app-studies.mjs` for their individual pages. Full-size app images and their thumbnails live in `docs/assets/apps/`. Their dimensions and bilingual captions are in `app-media.mjs`.
+
+Edit `engineering-notes.mjs` for the technical sections of the app pages and case studies. The open-source studies link directly to implementation files and tests at the revisions discussed.
 
 Edit `project-index.mjs` for the open-source directory and `cases.mjs` or `queue-case.mjs` for engineering case studies. Each entry carries its English and Portuguese text together. The layout and navigation live in `build.mjs`. Styles, fonts and evidence images are in `docs/assets/`.
 

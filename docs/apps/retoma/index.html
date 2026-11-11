@@ -53,7 +53,9 @@
           <p class="hero-overline"><span class="orange-rule"></span>Web · React · SQLite</p>
           <h1>Retoma<span>.</span></h1>
           <p class="case-lead">A contractor who sent several quotes last week needs to know whom to call back today. Retoma puts those follow-ups in date order and keeps the next action beside the quote.</p>
-          <p class="product-stage">Web app with a demo</p>
+          <div class="product-meta"><p class="product-stage">Web app with a demo</p>
+            <a class="text-link" href="#engineering">Engineering details <span aria-hidden="true" class="arrow">↓</span></a>
+          </div>
         </div>
         <div class="product-media media-detail format-landscape single"><figure class="product-shot">
       <a href="/assets/apps/retoma-overview.webp" class="expand-shot" aria-label="Enlarge image · Retoma’s Portuguese demo dashboard with open quotes, follow-ups due and an example message.">
@@ -63,10 +65,32 @@
     </figure></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Engineering details</h2>
+      <p class="engineering-intro">The server stores amounts as integer cents and interprets follow-up dates in the São Paulo time zone. The total and due date keep the same meaning when the dashboard is reopened.</p>
+      <dl class="engineering-notes notes-4"><div>
+    <dt>React and TypeScript</dt>
+    <dd>The React dashboard and API handlers share TypeScript rules for quote status, money and follow-up dates. Vite and vinext build the application for the Cloudflare Workers runtime.</dd>
+  </div>
+<div>
+    <dt>Query design</dt>
+    <dd>Drizzle maps quotes and settings to Cloudflare D1, a SQLite database. A composite index on owner and follow-up date supports the date-ordered queue for each contractor.</dd>
+  </div>
+<div>
+    <dt>Concurrent edits</dt>
+    <dd>When updating a quote, the API includes its last-read timestamp in the database update. If another request changes the record in the meantime, the API returns HTTP 409.</dd>
+  </div>
+<div>
+    <dt>Testing failed imports</dt>
+    <dd>The Node.js test suite exercises the API handlers against a local SQLite fixture. One test injects a failure during a batch import and checks that the original quotes remain intact.</dd>
+  </div></dl>
+
+    </div>
+  </section>
     <section class="product-notes"><div class="wrap product-columns">
       <div><h2>A walkthrough</h2><ol class="product-steps"><li>Add a quote with an amount, a contact and a follow-up date.</li><li>Open the follow-up queue and review the message prepared for that quote.</li><li>Contact the customer, then record the outcome or set another follow-up date.</li></ol></div>
       <div class="product-tech">
-        <h2>Implementation</h2><p>The server stores amounts as integer cents and interprets follow-up dates in the São Paulo time zone. The total and due date keep the same meaning when the dashboard is reopened.</p>
         <h2>Development status</h2><p>The web app includes a demo with sample quotes. Changes in that demo last for the current session and reset on reload.</p>
       </div>
     </div>

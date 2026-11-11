@@ -53,7 +53,9 @@
           <p class="hero-overline"><span class="orange-rule"></span>Android · React Native</p>
           <h1>Wearloom<span>.</span></h1>
           <p class="case-lead">A shirt photographed today can become part of next Friday’s outfit. Wearloom keeps the photograph, the garment details and the outfits that use it together on the phone.</p>
-          <p class="product-stage">Android preview</p>
+          <div class="product-meta"><p class="product-stage">Android preview</p>
+            <a class="text-link" href="#engineering">Engineering details <span aria-hidden="true" class="arrow">↓</span></a>
+          </div>
         </div>
         <div class="product-media media-detail format-portrait multiple"><figure class="product-shot">
       <a href="/assets/apps/wearloom.webp" class="expand-shot" aria-label="Enlarge image · Wearloom’s sample wardrobe shows a linen shirt, T-shirt and trousers, with filters above the clothing grid.">
@@ -68,10 +70,32 @@
     </figure></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Engineering details</h2>
+      <p class="engineering-intro">Once its models are downloaded, the Android preview can classify a garment on the device. The wardrobe keeps the original photo so the wearer can correct a suggestion or keep the original framing.</p>
+      <dl class="engineering-notes notes-4"><div>
+    <dt>Mobile stack</dt>
+    <dd>TypeScript and React Native handle the wardrobe, outfit editor and calendar. Expo Image Picker supplies a photo from the camera or gallery, and Expo Image Manipulator compresses the image before storage.</dd>
+  </div>
+<div>
+    <dt>On-device inference</dt>
+    <dd>On Android, an explicit recognition request loads ONNX Runtime. The CPU runs the models sequentially and releases each session after inference. If segmentation fails, the app can keep the garment category it already identified.</dd>
+  </div>
+<div>
+    <dt>Local storage</dt>
+    <dd>AsyncStorage holds the wardrobe catalogue. Compressed photographs live in the app’s document directory. The catalogue stores portable references so it can resolve the photo paths again when the app opens.</dd>
+  </div>
+<div>
+    <dt>Model integrity</dt>
+    <dd>A native Java module streams downloaded model files through SHA-256. Automated tests exercise the Java implementation and check the fallback for devices without the module, including interrupted reads and malformed digests.</dd>
+  </div></dl>
+
+    </div>
+  </section>
     <section class="product-notes"><div class="wrap product-columns">
       <div><h2>A walkthrough</h2><ol class="product-steps"><li>Photograph a garment or pick a photo from your gallery.</li><li>Review the suggested category and colour, then save the piece to your wardrobe.</li><li>Combine it with other saved pieces and choose a day to wear the outfit.</li></ol></div>
       <div class="product-tech">
-        <h2>Implementation</h2><p>Once its models are downloaded, the Android preview can classify a garment on the device. The wardrobe keeps the original photo so the wearer can correct a suggestion or keep the original framing.</p>
         <h2>Development status</h2><p>The Android preview has been exercised in an emulator. Camera handling and recognition speed on a physical phone are still being evaluated.</p>
       </div>
     </div>

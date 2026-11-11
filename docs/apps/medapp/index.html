@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f7f6f0">
     <title>MedApp — Igor Almeida</title>
-    <meta name="description" content="A mobile workspace for patient schedules and follow-up care, developed from the desktop FisioApp.">
+    <meta name="description" content="A mobile workspace for patient schedules, recurring appointments and follow-up care.">
     <link rel="canonical" href="https://almeida96.github.io/apps/medapp/">
     <link rel="alternate" hreflang="en" href="https://almeida96.github.io/apps/medapp/">
     <link rel="alternate" hreflang="pt-BR" href="https://almeida96.github.io/pt/aplicativos/medapp/">
     <link rel="alternate" hreflang="x-default" href="https://almeida96.github.io/apps/medapp/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="MedApp — Igor Almeida">
-    <meta property="og:description" content="A mobile workspace for patient schedules and follow-up care, developed from the desktop FisioApp.">
+    <meta property="og:description" content="A mobile workspace for patient schedules, recurring appointments and follow-up care.">
     <meta property="og:image" content="https://almeida96.github.io/assets/apps/medapp.webp">
     <meta property="og:url" content="https://almeida96.github.io/apps/medapp/">
     <link rel="icon" href="/favicon.png">
@@ -53,7 +53,9 @@
           <p class="hero-overline"><span class="orange-rule"></span>React Native · Expo</p>
           <h1>MedApp<span>.</span></h1>
           <p class="case-lead">A patient who returns every week needs a sequence of appointments that fits around the rest of the clinic’s schedule. MedApp lets the clinician check the whole series before adding it to the calendar.</p>
-          <p class="product-stage">Mobile prototype</p>
+          <div class="product-meta"><p class="product-stage">Mobile prototype</p>
+            <a class="text-link" href="#engineering">Engineering details <span aria-hidden="true" class="arrow">↓</span></a>
+          </div>
         </div>
         <div class="product-media media-detail format-portrait single"><figure class="product-shot">
       <a href="/assets/apps/medapp.webp" class="expand-shot" aria-label="Enlarge image · MedApp’s weekly schedule shows two recurring visits for an example patient, with an empty day between them.">
@@ -63,10 +65,32 @@
     </figure></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Engineering details</h2>
+      <p class="engineering-intro">The server checks the proposed visits against existing appointments and blocked hours. It saves the series together so a conflict on the last date cannot leave half a schedule booked.</p>
+      <dl class="engineering-notes notes-4"><div>
+    <dt>Client and API</dt>
+    <dd>The mobile client uses TypeScript, React Native and Expo. A JavaScript API built on Node.js handles calendar requests. On the device, Expo SecureStore holds the session token used for authenticated requests.</dd>
+  </div>
+<div>
+    <dt>Persistence model</dt>
+    <dd>The prototype runs a single API process backed by a JSON file. Writes enter a queue, update a copy of the state and replace the file before the new state becomes visible to other requests.</dd>
+  </div>
+<div>
+    <dt>Safe booking retries</dt>
+    <dd>A recurring booking carries a request ID. Retrying the same request returns the existing series, even after a restart. Reusing its ID with different dates or rules produces an HTTP 409 conflict.</dd>
+  </div>
+<div>
+    <dt>Calendar tests</dt>
+    <dd>Node.js tests submit two series competing for the same slots and introduce a conflict on a later visit. Other cases exercise daylight saving transitions, when a requested local time can disappear from the calendar.</dd>
+  </div></dl>
+
+    </div>
+  </section>
     <section class="product-notes"><div class="wrap product-columns">
       <div><h2>A walkthrough</h2><ol class="product-steps"><li>Open the calendar and choose a patient for a recurring appointment.</li><li>Set the day, time and number of visits, then check the proposed dates.</li><li>Resolve any conflicts, confirm the series and review the bookings in the weekly calendar.</li></ol></div>
       <div class="product-tech">
-        <h2>Implementation</h2><p>The server checks the proposed visits against existing appointments and blocked hours. It saves the series together so a conflict on the last date cannot leave half a schedule booked.</p>
         <h2>Development status</h2><p>The mobile prototype works with a local API and has a browser preview. Signed mobile builds and validation on physical devices are pending.</p>
       </div>
     </div>

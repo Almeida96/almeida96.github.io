@@ -53,7 +53,9 @@
           <p class="hero-overline"><span class="orange-rule"></span>Windows · Unreal Engine</p>
           <h1>Extension 9<span>.</span></h1>
           <p class="case-lead">O turno da noite na pensão começa com um telefone tocando na recepção. A ligação dá um motivo para sair do balcão. No caderno ficam as pistas para decidir qual quarto conferir em seguida.</p>
-          <p class="product-stage">Protótipo jogável para Windows</p>
+          <div class="product-meta"><p class="product-stage">Protótipo jogável para Windows</p>
+            <a class="text-link" href="#engineering">Detalhes técnicos <span aria-hidden="true" class="arrow">↓</span></a>
+          </div>
         </div>
         <div class="product-media media-detail format-landscape single"><figure class="product-shot">
       <a href="/assets/apps/extension-corridor.webp" class="expand-shot" aria-label="Ampliar imagem · Corredor da pensão ao lado do quarto 201, com uma ligação pedindo ao jogador que recupere uma chave.">
@@ -63,10 +65,32 @@
     </figure></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
+      <p class="engineering-intro">Cada pendência tem um ponto de retomada em memória. Depois de uma captura, o jogador pode repetir a ligação em andamento. Ao abrir o caderno, a ameaça fica pausada durante a leitura.</p>
+      <dl class="engineering-notes notes-4"><div>
+    <dt>Unreal Engine e C++</dt>
+    <dd>O modo de jogo em C++ controla ligações, objetivos e desfechos. Uma classe separada desenha o caderno e as legendas a partir desse estado, mantendo o diálogo coerente com a tarefa atual.</dd>
+  </div>
+<div>
+    <dt>Visibilidade e colisão</dt>
+    <dd>Antes de a ameaça capturar o jogador, o jogo traça uma linha da câmera em primeira pessoa até ela. Uma parede que bloqueie essa linha pode interromper um encontro no corredor.</dd>
+  </div>
+<div>
+    <dt>Ferramentas de áudio</dt>
+    <dd>Um script em Python sintetiza efeitos provisórios em WAV. O telefone combina dois tons com pausas programadas. Uma semente fixa permite reproduzir os efeitos que usam ruído.</dd>
+  </div>
+<div>
+    <dt>Testes do jogo no Windows</dt>
+    <dd>Um script em PowerShell inicia a Unreal sem intervenção e verifica pontos de retomada, capturas e os dois finais. Também pode testar a versão empacotada para Windows e salvar imagens para revisão visual.</dd>
+  </div></dl>
+
+    </div>
+  </section>
     <section class="product-notes"><div class="wrap product-columns">
       <div><h2>Passo a passo</h2><ol class="product-steps"><li>Comece o turno e atenda ao telefone da recepção.</li><li>Leia a conversa, consulte o caderno e siga a pista pelo corredor.</li><li>Inspecione o quarto indicado e volte para a próxima ligação.</li></ol></div>
       <div class="product-tech">
-        <h2>Implementação</h2><p>Cada pendência tem um ponto de retomada em memória. Depois de uma captura, o jogador pode repetir a ligação em andamento. Ao abrir o caderno, a ameaça fica pausada durante a leitura.</p>
         <h2>Estágio de desenvolvimento</h2><p>O protótipo para Windows tem um turno jogável com dois desfechos. As ligações usam diálogos em texto e efeitos sonoros. Reabrir o jogo inicia um novo turno.</p>
       </div>
     </div>

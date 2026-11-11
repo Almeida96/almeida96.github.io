@@ -270,7 +270,6 @@ footer { border-top:1px solid var(--line) }
 [data-app="skillpath"] { --mat:#dadcd0 }
 [data-app="retoma"] { --mat:#d8e4de }
 [data-app="jiu-jitsu-academy"] { --mat:#dfdeda }
-[data-app="fisioapp"] { --mat:#d3ddd5 }
 [data-app="extension-9"] { --mat:#2c2928 }
 [data-app="co-op-exploration"] { --mat:#283a42 }
 .app-grid { column-gap:clamp(20px,3vw,44px); row-gap:34px }
@@ -300,6 +299,19 @@ footer { border-top:1px solid var(--line) }
 .product-intro h1 { margin:15px 0 19px; font:700 clamp(58px,6.5vw,96px)/.96 var(--display); letter-spacing:-.03em; overflow-wrap:anywhere }
 .product-intro h1 span { color:var(--orange) }
 .product-stage { display:inline-block; border-top:1px solid var(--line); margin-top:23px; padding-top:9px; color:var(--muted); font:500 12px/1.5 var(--mono) }
+.product-meta { display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 24px; margin-top:21px }
+.product-meta .product-stage { margin:0 }
+.engineering { padding-block:clamp(30px,4.3vw,66px); background:#edf0e9; border-top:1px solid var(--line) }
+.engineering h2 { font:700 clamp(35px,4vw,57px)/1.05 var(--display); letter-spacing:-.025em; margin:0 0 22px }
+.engineering-intro { margin:-8px 0 23px; max-width:72ch; color:#40483f; line-height:1.63 }
+.engineering-notes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px clamp(24px,4vw,55px); margin:0 }
+.engineering-notes>div { border-top:1px solid #adb6a7; padding-top:13px }
+.engineering-notes dt { color:var(--ink); font:650 clamp(23px,2.3vw,31px)/1.15 var(--display); margin-bottom:7px }
+.engineering-notes dd { margin:0; max-width:65ch; color:#40483f; line-height:1.63; overflow-wrap:anywhere }
+.engineering-files { display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 20px; margin-top:22px }
+.engineering-files>span { font:500 12px/1.5 var(--mono); color:var(--muted) }
+@media (min-width:960px) { .engineering-notes.notes-3 { grid-template-columns:repeat(3,minmax(0,1fr)) } }
+@media (max-width:680px) { .engineering-notes { grid-template-columns:1fr; gap:17px } }
 .media-detail,.media-secondary { min-width:0 }
 .media-detail.format-portrait.multiple { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px }
 .expand-shot { display:grid; place-items:center; background:var(--mat); position:relative; cursor:zoom-in; padding:10px }

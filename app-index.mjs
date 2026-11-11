@@ -18,12 +18,12 @@ export const appIndex = [
     name: "MedApp",
     en: {
       stage: "Mobile prototype",
-      description: "A mobile workspace for patient schedules and follow-up care, developed from the desktop FisioApp.",
+      description: "A mobile workspace for patient schedules, recurring appointments and follow-up care.",
       workflow: "A clinician can open a patient's record and schedule a reminder for their next visit.",
     },
     pt: {
       stage: "Protótipo móvel",
-      description: "Aplicativo móvel para agenda e acompanhamento de pacientes, desenvolvido a partir do FisioApp para desktop.",
+      description: "Aplicativo móvel para organizar a agenda, agendar consultas recorrentes e acompanhar pacientes.",
       workflow: "O profissional pode abrir o cadastro do paciente e agendar um lembrete para o retorno.",
     },
   },
@@ -69,20 +69,6 @@ export const appIndex = [
       stage: "Protótipo móvel",
       description: "Diretório móvel de academias e eventos de jiu-jítsu, com uma área para professores.",
       workflow: "O aluno busca uma academia pela cidade, enquanto o professor pode convidar um aluno e registrar sua graduação.",
-    },
-  },
-  {
-    slug: "fisioapp",
-    name: "FisioApp",
-    en: {
-      stage: "Earlier desktop version",
-      description: "An offline desktop app for physiotherapists who sell treatment sessions in packages.",
-      workflow: "Record a visit, review the patient's session history and check the remaining balance.",
-    },
-    pt: {
-      stage: "Versão anterior para desktop",
-      description: "Aplicativo offline para fisioterapeutas que trabalham com pacotes de sessões.",
-      workflow: "Registre um atendimento, consulte o histórico do paciente e veja quantas sessões restam no pacote.",
     },
   },
   {

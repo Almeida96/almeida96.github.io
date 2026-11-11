@@ -53,7 +53,9 @@
           <p class="hero-overline"><span class="orange-rule"></span>React Native · TypeScript</p>
           <h1>SkillPath<span>.</span></h1>
           <p class="case-lead">Como saber se o treino de lance livre está dando resultado? O SkillPath transforma a pergunta em um exercício repetível. Cada sessão registra quantos arremessos entraram em dez tentativas do mesmo ponto.</p>
-          <p class="product-stage">Protótipo móvel</p>
+          <div class="product-meta"><p class="product-stage">Protótipo móvel</p>
+            <a class="text-link" href="#engineering">Detalhes técnicos <span aria-hidden="true" class="arrow">↓</span></a>
+          </div>
         </div>
         <div class="product-media media-detail format-portrait multiple"><figure class="product-shot">
       <a href="/assets/apps/skillpath.webp" class="expand-shot" aria-label="Ampliar imagem · O gráfico de lances livres mostra a evolução de quatro para seis acertos a cada dez arremessos, com meta de oito.">
@@ -68,10 +70,32 @@
     </figure></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
+      <p class="engineering-intro">Cada tentativa fica registrada como uma medição própria. O histórico preserva as séries anteriores ao lado do resultado mais recente, junto com as anotações sobre as condições do treino.</p>
+      <dl class="engineering-notes notes-4"><div>
+    <dt>Aplicativo móvel</dt>
+    <dd>O cliente em TypeScript usa React Native e Expo Router nas telas de treino e histórico. Comandos de domínio registram cada tentativa separadamente da interface, o que permite testar as regras de pontuação em Node.js.</dd>
+  </div>
+<div>
+    <dt>Armazenamento offline</dt>
+    <dd>No celular, o espaço de prática fica no armazenamento chave-valor do Expo SQLite. Um repositório enfileira as alterações e valida os dados na leitura. Se a validação falhar, preserva o conteúdo para recuperação.</dd>
+  </div>
+<div>
+    <dt>Sincronização opcional</dt>
+    <dd>Com o Supabase configurado, o PostgreSQL confere a revisão enviada pelo aparelho antes de aceitar a gravação. O app compara a versão comum com as alterações de cada dispositivo e sinaliza edições conflitantes no mesmo campo.</dd>
+  </div>
+<div>
+    <dt>Testes de concorrência</dt>
+    <dd>Os testes em Node.js cobrem metas editadas offline em dois aparelhos, exclusão simultânea a uma edição e dois registros do mesmo treino agendado. No último caso, a pessoa escolhe qual tentativa preservar.</dd>
+  </div></dl>
+
+    </div>
+  </section>
     <section class="product-notes"><div class="wrap product-columns">
       <div><h2>Passo a passo</h2><ol class="product-steps"><li>Escolha o desafio de lance livre e faça uma primeira série de dez arremessos.</li><li>Registre os acertos e anote de onde você arremessou.</li><li>Repita a série à mesma distância e compare os dois registros no histórico da atividade.</li></ol></div>
       <div class="product-tech">
-        <h2>Implementação</h2><p>Cada tentativa fica registrada como uma medição própria. O histórico preserva as séries anteriores ao lado do resultado mais recente, junto com as anotações sobre as condições do treino.</p>
         <h2>Estágio de desenvolvimento</h2><p>O lance livre é um dos desafios guiados do protótipo móvel. Os testes em aparelhos físicos fazem parte da preparação para a distribuição em loja.</p>
       </div>
     </div>

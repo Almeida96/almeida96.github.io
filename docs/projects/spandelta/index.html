@@ -55,6 +55,7 @@
           <div class="case-actions">
             <a class="button" href="https://github.com/Almeida96/spandelta">Source on GitHub <span aria-hidden="true" class="arrow">↗</span></a>
             <a class="text-link" href="https://github.com/Almeida96/spandelta/releases/tag/v0.1.0">Download release <span aria-hidden="true" class="arrow">↗</span></a>
+            <a class="text-link" href="#engineering">Engineering details <span aria-hidden="true" class="arrow">↓</span></a>
           </div>
         </div>
         <div class="case-visual"><div class="visual trace-art" aria-hidden="true">
@@ -67,6 +68,25 @@
     </div><p>Project example</p></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Engineering details</h2>
+
+      <dl class="engineering-notes notes-3"><div>
+    <dt>Trace ingestion</dt>
+    <dd>A Kotlin receiver on Java 21 accepts OTLP over HTTP. It decodes OpenTelemetry Protobuf or JSON and writes spans to SQLite through JDBC so two captured releases can be compared offline.</dd>
+  </div>
+<div>
+    <dt>Percentile calculation</dt>
+    <dd>The engine groups spans by service, operation and span kind. It selects an observed span at the 95th percentile and keeps its trace and span IDs for inspection through MCP.</dd>
+  </div>
+<div>
+    <dt>Wire-level tests</dt>
+    <dd>An integration test sends gzip-compressed Protobuf through the official OpenTelemetry exporter and checks trace context across services. Other tests cover low sample counts and overlapping child spans.</dd>
+  </div></dl>
+      <p class="engineering-files"><span>Source and tests</span> <a class="text-link" href="https://github.com/Almeida96/spandelta/blob/1d05ec543a61be39d385a243a12394b575353042/src/main/kotlin/io/github/almeida96/spandelta/Analysis.kt">Analysis.kt <span aria-hidden="true" class="arrow">↗</span></a> <a class="text-link" href="https://github.com/Almeida96/spandelta/blob/1d05ec543a61be39d385a243a12394b575353042/src/test/kotlin/io/github/almeida96/spandelta/AnalysisTest.kt">AnalysisTest.kt <span aria-hidden="true" class="arrow">↗</span></a></p>
+    </div>
+  </section>
     <div class="case-detail">
       <div class="wrap detail-grid">
         <aside class="tech"><h2>Technology</h2><span>Kotlin</span><span>OpenTelemetry</span><span>SQLite</span><span>MCP</span></aside>

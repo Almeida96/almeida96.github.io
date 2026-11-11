@@ -53,7 +53,9 @@
           <p class="hero-overline"><span class="orange-rule"></span>React Native · Expo</p>
           <h1>Aplicativo para academias de jiu-jítsu<span>.</span></h1>
           <p class="case-lead">Quem viaja para treinar pode procurar uma academia na cidade de destino. No mesmo app, os professores têm uma área restrita para convidar alunos e registrar graduações.</p>
-          <p class="product-stage">Protótipo móvel</p>
+          <div class="product-meta"><p class="product-stage">Protótipo móvel</p>
+            <a class="text-link" href="#engineering">Detalhes técnicos <span aria-hidden="true" class="arrow">↓</span></a>
+          </div>
         </div>
         <div class="product-media media-detail format-portrait single"><figure class="product-shot">
       <a href="/assets/apps/academy-search.webp" class="expand-shot" aria-label="Ampliar imagem · Detalhe do diretório de academias com o campo de busca e o filtro de academias com professor ativado.">
@@ -63,17 +65,35 @@
     </figure></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
+      <p class="engineering-intro">Cada convite fica vinculado a uma academia. Antes de registrar uma graduação, o servidor verifica se o professor pertence à escola responsável pelo aluno.</p>
+      <dl class="engineering-notes notes-3"><div>
+    <dt>TypeScript no celular e na web</dt>
+    <dd>O diretório e as telas do professor usam React Native e Expo. O aplicativo nativo guarda o token da sessão no Expo SecureStore. A versão web usa o armazenamento de sessão do navegador.</dd>
+  </div>
+<div>
+    <dt>Node.js e SQLite</dt>
+    <dd>A API em TypeScript usa o servidor HTTP e o driver SQLite do próprio Node.js. Alterações de conta são gravadas em transações que desfazem a escrita se a operação falhar.</dd>
+  </div>
+<div>
+    <dt>Convites e testes de acesso</dt>
+    <dd>O convite determina a academia e o papel de quem o recebe. Testes com o executor do Node.js verificam que o convite só pode ser usado uma vez e que o destinatário não consegue elevar as próprias permissões.</dd>
+  </div></dl>
+
+    </div>
+  </section>
     <section class="product-notes"><div class="wrap product-columns">
       <div><h2>Passo a passo</h2><ol class="product-steps"><li>Busque pelo nome da cidade no diretório e abra o perfil de uma academia.</li><li>Confira a localização e os canais de contato e salve a academia nos favoritos.</li><li>Na conta de professor, convide um aluno e registre a nova faixa de um aluno matriculado.</li></ol></div>
       <div class="product-tech">
-        <h2>Implementação</h2><p>Cada convite fica vinculado a uma academia. Antes de registrar uma graduação, o servidor verifica se o professor pertence à escola responsável pelo aluno.</p>
         <h2>Estágio de desenvolvimento</h2><p>O protótipo móvel inclui uma demonstração no navegador para consultar o diretório e experimentar o fluxo do professor.</p>
       </div>
     </div>
 
     </section>
     <div class="wrap next-case"><span class="eyebrow">Próximo aplicativo</span>
-      <a class="" href="/pt/aplicativos/fisioapp/">FisioApp <span aria-hidden="true" class="arrow">→</span></a>
+      <a class="" href="/pt/aplicativos/extension-9/">Extension 9 <span aria-hidden="true" class="arrow">→</span></a>
     </div>
     <dialog class="image-viewer" aria-label="Visualizador de imagens">
     <div class="viewer-body"><form method="dialog"><button type="submit" autofocus>Fechar ×</button></form>

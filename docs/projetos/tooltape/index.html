@@ -55,6 +55,7 @@
           <div class="case-actions">
             <a class="button" href="https://github.com/Almeida96/tooltape">Código no GitHub <span aria-hidden="true" class="arrow">↗</span></a>
             <a class="text-link" href="https://github.com/Almeida96/tooltape/releases/tag/v0.1.0">Baixar release <span aria-hidden="true" class="arrow">↗</span></a>
+            <a class="text-link" href="#engineering">Detalhes técnicos <span aria-hidden="true" class="arrow">↓</span></a>
           </div>
         </div>
         <div class="case-visual"><div class="visual tape-art" aria-hidden="true">
@@ -65,6 +66,25 @@
   </div><p>Exemplo do projeto</p></div>
       </div>
     </div>
+    <section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">Detalhes técnicos</h2>
+
+      <dl class="engineering-notes notes-3"><div>
+    <dt>Gravação de sessões MCP</dt>
+    <dd>A CLI em Java 21 inicia um servidor MCP local, lista suas ferramentas e grava as chamadas solicitadas pela entrada e saída padrão. Jackson interpreta o JSON trocado pelos dois processos.</dd>
+  </div>
+<div>
+    <dt>Reprodução das chamadas</dt>
+    <dd>O servidor avança uma posição a cada chamada correspondente. Chamadas repetidas podem devolver resultados diferentes, conforme a gravação. Uma requisição fora de ordem preserva a próxima resposta para nova tentativa.</dd>
+  </div>
+<div>
+    <dt>Integridade e testes</dt>
+    <dd>Cada gravação inclui um checksum SHA-256 calculado sobre JSON canônico. Testes com JUnit cobrem arquivos alterados, campos ausentes ou nulos, mudanças na ordem dos arrays e o encerramento do processo após um timeout.</dd>
+  </div></dl>
+      <p class="engineering-files"><span>Código e testes</span> <a class="text-link" href="https://github.com/Almeida96/tooltape/blob/968abf0be09528195fdeae315e27f5578a005b27/src/main/java/io/github/almeida96/tooltape/ReplayServer.java">ReplayServer.java <span aria-hidden="true" class="arrow">↗</span></a> <a class="text-link" href="https://github.com/Almeida96/tooltape/blob/968abf0be09528195fdeae315e27f5578a005b27/src/test/java/io/github/almeida96/tooltape/ReplayServerTest.java">ReplayServerTest.java <span aria-hidden="true" class="arrow">↗</span></a></p>
+    </div>
+  </section>
     <div class="case-detail">
       <div class="wrap detail-grid">
         <aside class="tech"><h2>Tecnologias</h2><span>Java 21</span><span>MCP</span><span>JSON-RPC</span></aside>

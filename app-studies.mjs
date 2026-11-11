@@ -124,31 +124,6 @@ export const appStudies = {
       stageNote: "O protótipo móvel inclui uma demonstração no navegador para consultar o diretório e experimentar o fluxo do professor."
     }
   },
-  fisioapp: {
-    name: "FisioApp",
-    en: {
-      platform: "Desktop · Python · Tkinter",
-      purpose: "A physiotherapist selling ten-visit packages needs to record what happened and check how many visits are left after each appointment. FisioApp handles both from a desktop computer, including when it is offline.",
-      steps: [
-        "Find the patient by ID and open the session form.",
-        "Write the visit notes and save the session.",
-        "Open the patient history to see the notes alongside the number of visits left in the current package."
-      ],
-      implementation: "The balance is calculated from the full session history. The tenth visit leaves zero visits in the package. Recording the eleventh starts the next package while keeping the first ten notes intact.",
-      stageNote: "This is the earlier desktop application. Its records are stored locally as JSON, and the later MedApp includes an import path for those patient files."
-    },
-    pt: {
-      platform: "Desktop · Python · Tkinter",
-      purpose: "Depois de cada atendimento de um pacote de dez sessões, o fisioterapeuta precisa registrar como foi a consulta e saber quantas sessões restam. O FisioApp reúne essas duas tarefas no computador e funciona offline.",
-      steps: [
-        "Localize o paciente pelo identificador e abra o formulário de sessão.",
-        "Anote como foi o atendimento e salve o registro.",
-        "Abra o histórico do paciente para consultar as anotações e o saldo do pacote atual."
-      ],
-      implementation: "O saldo vem do histórico completo de atendimentos. A décima sessão deixa o pacote com saldo zero. A décima primeira abre o pacote seguinte e preserva as anotações das dez sessões anteriores.",
-      stageNote: "Esta é a versão anterior para desktop. Os registros ficam em um arquivo JSON local, e o MedApp permite importar esses cadastros."
-    }
-  },
   "extension-9": {
     name: "Extension 9",
     en: {

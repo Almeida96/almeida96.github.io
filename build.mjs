@@ -7,6 +7,7 @@ import { projectIndex } from './project-index.mjs';
 import { appIndex } from './app-index.mjs';
 import { appStudies } from './app-studies.mjs';
 import { appMedia } from './app-media.mjs';
+import { engineeringNotes } from './engineering-notes.mjs';
 
 const args = process.argv.slice(2);
 const dist = fileURLToPath(new URL(args.includes('--pages') ? './docs/' : './dist/', import.meta.url));
@@ -463,6 +464,28 @@ function caseProse(language, slug, study) {
   return `<div class="case-prose">${prose}${slug === 'queuesift' ? exampleDecisions(language) : ''}${figure}${example}</div>`;
 }
 
+function engineeringTitle(language) {
+  return language === 'en' ? 'Engineering details' : 'Detalhes técnicos';
+}
+
+function engineeringSection(language, slug, introduction = '') {
+  const engineering = engineeringNotes[slug];
+  const notes = engineering[language];
+  const items = notes.map(note => `<div>
+    <dt>${escape(note.label)}</dt>
+    <dd>${escape(note.text)}</dd>
+  </div>`).join('\n');
+  const files = engineering.files?.map(url => link(url, url.split('/').pop(), 'text-link')).join(' ');
+  return `<section class="engineering" aria-labelledby="engineering">
+    <div class="wrap">
+      <h2 id="engineering" tabindex="-1">${engineeringTitle(language)}</h2>
+      ${introduction ? `<p class="engineering-intro">${escape(introduction)}</p>` : ''}
+      <dl class="engineering-notes notes-${notes.length}">${items}</dl>
+      ${files ? `<p class="engineering-files"><span>${language === 'en' ? 'Source and tests' : 'Código e testes'}</span> ${files}</p>` : ''}
+    </div>
+  </section>`;
+}
+
 function casePage(language, slug) {
   const t = copy[language];
   const study = caseStudies[slug][language];
@@ -479,11 +502,13 @@ function casePage(language, slug) {
           <div class="case-actions">
             ${link(study.repo, t.code, 'button')}
             ${link(study.release, t.download, 'text-link')}
+            ${link('#engineering', engineeringTitle(language), 'text-link', 'down')}
           </div>
         </div>
         <div class="case-visual">${art(slug, t)}<p>${t.synthetic}</p></div>
       </div>
     </div>
+    ${engineeringSection(language, slug)}
     <div class="case-detail">
       <div class="wrap detail-grid">
         <aside class="tech"><h2>${t.stack}</h2>${tech}</aside>
@@ -502,8 +527,8 @@ function appPage(language, app) {
   const entry = app[language];
   const study = appStudies[app.slug][language];
   const text = language === 'en'
-    ? {back:'All apps', usage:'A walkthrough', engineering:'Implementation', status:'Development status', next:'Next app'}
-    : {back:'Todos os aplicativos', usage:'Passo a passo', engineering:'Implementação', status:'Estágio de desenvolvimento', next:'Próximo aplicativo'};
+    ? {back:'All apps', usage:'A walkthrough', status:'Development status', next:'Next app'}
+    : {back:'Todos os aplicativos', usage:'Passo a passo', status:'Estágio de desenvolvimento', next:'Próximo aplicativo'};
   const next = appIndex[(appIndex.indexOf(app) + 1) % appIndex.length];
   const steps = study.steps.map(step => `<li>${escape(step)}</li>`).join('');
   return `<main id="main" class="product-page" data-app="${app.slug}">
@@ -514,15 +539,17 @@ function appPage(language, app) {
           <p class="hero-overline"><span class="orange-rule"></span>${escape(study.platform)}</p>
           <h1>${escape(entry.name ?? app.name)}<span>.</span></h1>
           <p class="case-lead">${escape(study.purpose)}</p>
-          <p class="product-stage">${escape(entry.stage)}</p>
+          <div class="product-meta"><p class="product-stage">${escape(entry.stage)}</p>
+            ${link('#engineering', engineeringTitle(language), 'text-link', 'down')}
+          </div>
         </div>
         ${renderAppVisual(app.slug, language, 'detail')}
       </div>
     </div>
+    ${engineeringSection(language, app.slug, study.implementation)}
     <section class="product-notes"><div class="wrap product-columns">
       <div><h2>${text.usage}</h2><ol class="product-steps">${steps}</ol></div>
       <div class="product-tech">
-        <h2>${text.engineering}</h2><p>${escape(study.implementation)}</p>
         <h2>${text.status}</h2><p>${escape(study.stageNote)}</p>
       </div>
     </div>
