@@ -355,28 +355,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-===============================================================================
-5. Google ML Kit Face Detection — registro de dependencia Android (0.6.1)
-===============================================================================
-Fornecedor: Google
-Artefato Maven: com.google.mlkit:face-detection:16.1.7
-Distribuicao: modelo de deteccao facial incluido no APK (bundled).
-Uso no Wearloom: localizar olhos e boca para alinhamento da selfie no avatar.
-Nao realiza identificacao da pessoa ou autenticacao por rosto no aplicativo.
-
-Esta dependencia e regida pelos Termos do ML Kit e pelos Termos das APIs Google,
-nao pelas licencas MIT/Apache dos outros modelos registrados neste arquivo.
-Este bloco registra a dependencia e suas fontes; nao relicencia o SDK/modelo.
-Os avisos aplicaveis das dependencias transitivas permanecem os de seus autores.
-
-Documentacao e versao consultadas em 2026-11-10:
-https://developers.google.com/ml-kit/vision/face-detection/android
-Termos e privacidade:
-https://developers.google.com/ml-kit/terms
-Termos das APIs Google:
-https://developers.google.com/terms
-
-Segundo os termos do fornecedor, imagens e resultados sao processados no
-dispositivo; o SDK pode enviar metricas tecnicas e realizar comunicacoes de
-manutencao. A politica de privacidade do Wearloom descreve essa distincao.
