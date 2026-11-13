@@ -1,6 +1,20 @@
-const CACHE="wearloom-beta-shell-69ea5e627ea41cb09843104b", START="/wearloom/beta/", URLS=["/wearloom/beta/","/wearloom/beta/_expo/static/js/web/index-e35d140aee750c246fa493f323e781bd.js","/wearloom/beta/assets/icon-071e849da45b-180.png","/wearloom/beta/assets/icon-071e849da45b-192.png","/wearloom/beta/assets/icon-071e849da45b-512.png","/wearloom/beta/manifest.webmanifest","/wearloom/beta/assets/fonts/Inter_400Regular.51b6ad87261f18b6433ec52871ddfabc.ttf","/wearloom/beta/assets/fonts/Inter_500Medium.137ab18bace28dd0bd83eb3b8ed2bc54.ttf","/wearloom/beta/assets/fonts/Inter_600SemiBold.a5f35888d2da465de352e0dcfaf33324.ttf","/wearloom/beta/assets/fonts/DMSerifDisplay_400Regular.57374ed10a41a43e40a4ae3420a6e0fe.ttf","/wearloom/beta/assets/fonts/Manrope_700Bold.33e6a451fdf22e8244d143288b957ba0.ttf"];
-self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(URLS))));
-self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith("wearloom-beta-shell-")&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>clients.claim())));
-self.addEventListener("fetch",e=>{const r=e.request,u=new URL(r.url);if(r.method!=="GET"||u.origin!==self.location.origin||u.search)return;
-if(r.mode==="navigate" && (u.pathname===START || u.pathname===START+"index.html")){e.respondWith(fetch(r).catch(async()=>await (await caches.open(CACHE)).match(START)||Response.error()));return;}
-if(URLS.includes(u.pathname))e.respondWith(caches.open(CACHE).then(async c=>await c.match(u.pathname)||fetch(r)));});
+'use strict';
+
+// Retire the beta shell while preserving each person's wardrobe on this device.
+self.addEventListener('install', event => {
+  event.waitUntil(self.skipWaiting());
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(key => key.startsWith('wearloom-beta-shell-')).map(key => caches.delete(key)));
+    await self.clients.claim();
+    const windows = await self.clients.matchAll({ type: 'window' });
+    const scope = self.registration.scope;
+    await self.registration.unregister();
+    const landing = new URL('../', scope).href;
+    await Promise.allSettled(windows.filter(client => client.url.startsWith(scope))
+      .map(client => client.navigate(landing)));
+  })());
+});
