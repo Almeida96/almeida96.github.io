@@ -25,8 +25,8 @@ async function concluir() {
       referrerPolicy: 'no-referrer', headers: { Accept: 'application/json' },
     });
     const result = await response.json();
-    if (response.ok && result.returnTo) {
-      voltar.href = '../';
+    if (response.ok && result.returnTo === 'https://almeida96.github.io/wearloom/') {
+      voltar.href = '/wearloom/';
       voltar.hidden = false;
       window.location.replace(voltar.href);
       return;
