@@ -13,7 +13,7 @@ async function concluir() {
     && ((codes.length === 1 && errors.length === 0 && codes[0].length > 0 && codes[0].length <= 2048)
       || (codes.length === 0 && errors.length === 1 && errors[0].length > 0 && errors[0].length <= 128));
   if (!valid) {
-    mensagem.textContent = 'Abra o Wearloom e toque em Conectar Pinterest para começar.';
+    mensagem.textContent = 'Abra o Look At e toque em Conectar Pinterest para começar.';
     return;
   }
   const body = new URLSearchParams({ state: states[0] });
